@@ -1,0 +1,9 @@
+body > header {
+	background-color: #A343D1
+}
+
+body > header > p,
+body > header > h1 {
+	text-align: center;
+}
+
