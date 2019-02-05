@@ -1,9 +1,31 @@
+/*Color de fondo de la cabecera de la web*/
 body > header {
 	background-color: #A343D1
 }
 
+/*Alineamos el título de la web y descripción*/
 body > header > p,
 body > header > h1 {
 	text-align: center;
 }
 
+/*Espacio de la imagen*/
+.imagen {
+	
+}
+
+/*Centramos el menú*/
+.menu {
+	list-style-type: none; /*Quitamos los estilos de representacion de listas por defecto(puntos)*/
+	display: flex; /*Muestra el menú como un contenedor flexible a nivel de bloque(horizontal)*/
+	justify-content: center; /*Alinea el menu en el centro de la página*/
+	padding: 0; /*Quitamos el padding que nos impide colocarlo en el centro*/
+}
+/*
+.menu li{
+	margin:  10px;
+}
+.menu li a:hover{
+	background-color: red;
+	transition: 0.5s ease;
+}*/
