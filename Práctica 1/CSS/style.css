@@ -1,26 +1,59 @@
 /*Color de fondo de la cabecera de la web*/
-body > header {
+body > header > div {
 	background-color: #A343D1
 }
 
 /*Alineamos el título de la web y descripción*/
-body > header > p,
-body > header > h1 {
+body > header > div > p,
+body > header > div > h1 {
 	text-align: center;
+	padding-bottom: 6px;
 }
 
-/*Espacio de la imagen*/
-.imagen {
-	
+/*Coloca el logotipo*/
+body > header > div > img {
+	margin-top: 25px;
+	margin-left: 25px;
+	margin-bottom: 0px;
 }
 
 /*Centramos el menú*/
-.menu {
+.menuCent {
 	list-style-type: none; /*Quitamos los estilos de representacion de listas por defecto(puntos)*/
 	display: flex; /*Muestra el menú como un contenedor flexible a nivel de bloque(horizontal)*/
 	justify-content: center; /*Alinea el menu en el centro de la página*/
 	padding: 0; /*Quitamos el padding que nos impide colocarlo en el centro*/
 }
+
+/*Decora y crea espacios en los elementos del menú*/
+body > header > nav > ul li {
+	padding: 10px;
+	background-color: #A343D1;
+	margin: 3px;
+	border: 2px solid;
+}
+
+.sinMargen {
+	margin: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 .menu li{
 	margin:  10px;

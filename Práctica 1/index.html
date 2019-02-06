@@ -10,48 +10,60 @@
 </head>
 <body>
 	<header>
-		<img id="logo-header" src="Images/flor_de_loto.png" alt="logotipo">
-		<h1>WorldView</h1>
-		<p>Tu web de fotograf&iacute;as art&iacute;sticas</p>
+
+		<!-- div para aplicar color de background sin el texto -->
+		<div id="caja-header">
+
+			<!-- Mostramos el logotipo -->
+			<img id="logo-header" src="Images/flor_de_loto.png" alt="logotipo">
+
+			<!-- Título y descripcion de la página web -->
+			<h1 class="sinMargen">WorldView</h1>
+			<p class="sinMargen">Tu web de fotograf&iacute;as art&iacute;sticas</p>
+		</div>
+
+		<!-- Menú de navegación -->
+		<nav>
+			<ul class="menuCent">
+				<li><a href="index.html">Inicio</a></li>
+				<li><a href="buscar.html">Buscar</a></li>
+				<li><a href="nueva.html">Nueva foto</a></li>
+				<li><a href="favoritas.html">Favoritas</a></li>
+				<li><a href="index.html">Logout</a></li>
+				<li><a href="login.html">Login</a></li>
+				<li><a href="registro.html">Registro</a></li>
+			</ul>
+		</nav>
 	</header>
-	<nav>
-		<ul class="menu">
-			<li><a href="index.html">Inicio</a></li>
-			<li><a href="buscar.html">Buscar</a></li>
-			<li><a href="nueva.html">Nueva foto</a></li>
-			<li><a href="favoritas.html">Favoritas</a></li>
-			<li><a href="index.html">Logout</a></li>
-			<li><a href="login.html">Login</a></li>
-			<li><a href="registro.html">Registro</a></li>
-		</ul>
-	</nav>
-	<section>
-		<h2>Mejores valoraciones</h2>
-		<article>
-			<h3>Foto 1</h3>
-			<img src="Images/foto1.jpg" alt="foto1" width="400" height="360">
-		</article>
-		<article>
-			<h3>Foto 2</h3>
-			<img src="Images/foto2.jpg" alt="foto2" width="400" height="360">
-		</article>
-		<article>
-			<h3>Foto 3</h3>
-			<img src="Images/foto3.jpg" alt="foto3" width="400" height="360">
-		</article>
-		<article>
-			<h3>Foto 4</h3>
-			<img src="Images/foto4.jpg" alt="foto4" width="400" height="360">
-		</article>
-		<article>
-			<h3>Foto 5</h3>
-			<img src="Images/foto5.jpg" alt="foto5" width="400" height="360">
-		</article>
-		<article>
-			<h3>Foto 6</h3>
-			<img src="Images/foto6.jpg" alt="foto6" width="400" height="360">
-		</article>
-	</section>
+	<main>
+
+		<!-- Sección de donde se muestran los artículos compuestos de fotos -->
+		<section>
+			<h2>Mejores valoraciones</h2>
+			<article>
+				<h3>Foto 1</h3>
+				<img src="Images/foto1.jpg" alt="foto1" width="400" height="360">
+			</article>
+			<article>
+				<h3>Foto 2</h3>
+				<img src="Images/foto2.jpg" alt="foto2" width="400" height="360">
+			</article>
+			<article>
+				<h3>Foto 3</h3>
+				<img src="Images/foto3.jpg" alt="foto3" width="400" height="360">
+			</article>
+			<article>
+				<h3>Foto 4</h3>
+				<img src="Images/foto4.jpg" alt="foto4" width="400" height="360">
+			</article>
+			<article>
+				<h3>Foto 5</h3>
+				<img src="Images/foto5.jpg" alt="foto5" width="400" height="360">
+			</article>
+		</section>
+	</main>
+
+	<!-- Información de pie de página -->
 	<footer>
 		<p><a href="acerca.html">Contacto</a> &copy; <strong>2019</strong> <button>Inicio</button></p>
 	</footer>
