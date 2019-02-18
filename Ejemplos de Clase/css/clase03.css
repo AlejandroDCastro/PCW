@@ -1,0 +1,25 @@
+/* FUENTES EXTERNAS */
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Roboto');
+
+* {
+	font-family: 'Roboto', sans-serif;
+}
+
+body > section > article > p {
+	font-family: 'Pacifico', cursive;
+}
+
+body > nav> ul {
+	list-style: none;
+}
+	body> nav > ul >li {
+		display: inline-block;
+	}
+		body> nav > ul > li > a {
+			display: block;
+			padding: .2em .5em;
+		}
+		body> nav > ul > li > a:hover {
+			background-color:  #;
+			font-color: #fff;
+		}
