@@ -1,4 +1,0 @@
-* {
-	/*Propiedad que define como son calculados el ancho y el alto de un elemento, si incluye padding y borders o no*/
-	box-sizing: border-box; /*Incluye padding y border*/
-}

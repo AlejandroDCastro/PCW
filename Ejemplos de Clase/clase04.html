@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Clase 04</title>
+	<link rel="stylesheet" href="clase04.css">
+</head>
+<body>
+	<h1>Lorem ipsum dolor sit amet.</h1>
+	<form action="registro.php">
+		<div><label for=''>Nombre:</label><input id="nombre" type="text" names="nombre" required autofocus></div>
+		<div><label for=''>Pwd:</label><input id="pwd" type="password" name="pwd"></div>
+		<div>
+			<input type="file" name="fichero">
+			<label for="fichero">Cargar fichero</label>
+		</div>
+		<div><input type="submit" value="Enviar"><input type="reset" values="Limpiar"></div>
+	</form>
+	<label for="fichero"><img src="flor_de_loto.png" alt="Florecilla"></label>
+	<picture>
+		<source media="(min-width:500px" srcset="flor_de_loto.png">
+			<source media="(min-width:700px" srcset="flor_de_loto.png">
+		<img src="flor_de_loto.png" alt="imagen">
+	</picture>
+</body>
+</html>
