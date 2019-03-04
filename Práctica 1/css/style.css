@@ -91,6 +91,6 @@ footer {
 			color: #fff;
 		}
 
-		footer > p a:hover {
+		footer > p a:hover, footer > p > a ~ a:link, footer > p > a ~ a:visited { /*~ se refiere a un hermano no inmediato de a*/
 			text-decoration: none;
 		}
