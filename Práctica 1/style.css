@@ -6,11 +6,6 @@
 	box-sizing: border-box;
 }
 
-.contorno {
-	border-top: solid 3px gray;
-	border-bottom: solid 3px gray;
-}
-
 body {
 	margin: 8px;
 }
@@ -30,6 +25,8 @@ header {
 			padding: .3em;
 			background-color: #fff;
 			border-radius: 7%;
+			border-top: solid 3px gray;
+			border-bottom: solid 3px gray;
 		}
 
 	header > p {
@@ -70,7 +67,7 @@ nav {
 			transition: all 300ms; /*crea el efecto con una transición lenta*/
 		}
 
-main {
+section {
 	background-color: gray;
 	width: 100%;
 }
