@@ -67,10 +67,76 @@ nav {
 			transition: all 300ms; /*crea el efecto con una transición lenta*/
 		}
 
-section {
-	background-color: gray;
+main {
+	background-color: #BABABA;
+	font-family: 'News Cycle';
 	width: 100%;
 }
+
+	main > h2 {
+		padding: 1.3em .6em;
+		color: #000;
+	}
+
+section {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap; /*distribuye los elementos flex en varias lineas si es necesario de izquierda a derecha y de arriba a abajo*/
+	justify-content: center; /*justifica los elementos flex en el centro del viewport*/
+	text-align: center;
+}
+
+	section > article {
+		max-width: 300px;
+		background-color: #6B6B6B;
+		margin: 30px;
+	}
+
+	section > article:hover {
+		background-color: #c0c;
+		transition: all .3s;
+	}
+
+		section > article > hgroup {
+			padding: 5px 0;
+		}
+
+			section > article > hgroup > h3 > a, section > article > hgroup > h4 > a {
+				text-decoration: none;
+				color: #fff;
+			}
+
+			section > article > hgroup > h3 > a:hover, section > article > hgroup > h4 > a:hover {
+				color: #E3CA10;
+			}
+
+		section > article > p {
+			padding-bottom: 5px;
+		}
+
+			section > article > p > i {
+				padding-left: 7px;
+			}
+
+			section > article > p > i:first-child {
+				color: #E00F0F;
+			}
+
+			section > article > p > i[class="fas fa-star"] {
+				color: #E4E009;
+			}
+
+			section > article > p > i[class="fas fa-comments"] {
+				color: #191919;
+			}
+
+				section > article > p > i:last-child > a,section > article > p > i:last-child {
+					color: #0D5208;
+				}
+
+				section > article > p > i:last-child > a:hover {
+					text-decoration: none;
+				}
 
 footer {
 	width: 100%;
@@ -89,10 +155,14 @@ footer {
 			margin: 0 1.5em;
 		}
 
-		footer > p a:link, footer > p > a:visited {
+		footer > p > a {
 			color: #fff;
 		}
 
-		footer > p a:hover, footer > p > a ~ a:link, footer > p > a ~ a:visited { /*~ se refiere a un hermano no inmediato de a*/
+		footer > p > a:hover, footer > p > a ~ a { /*~ se refiere a un hermano no inmediato de a*/
 			text-decoration: none;
+		}
+
+		footer > p > a ~ a:hover {
+			color: #191919;
 		}
