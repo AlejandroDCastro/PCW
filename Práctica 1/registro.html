@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/fontello.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-	<title>Inicio ViewWorld</title>
+	<title>Registro ViewWorld</title>
 </head>
 <body>
 	<header id="cabecera">
@@ -28,7 +28,35 @@
 		</ul>
 	</nav>
 	<main>
-		<h2></h2>
+		<h2>Registro</h2>
+		<form>
+			<div id="container-login">
+				<label for="">Nombre de usuario:</label>
+				<input class="formulario" type="text" id="login" placeholder="Introduce el nombre de usuario" required autofocus minlength="4" maxlength="20">
+			</div>
+			<div>
+				<label for="pass">Contraseña:</label>
+				<input class="formulario" type="password" id="pass" placeholder="Introduce la contraseña" required>
+			</div>
+			<div>
+				<label for="pass2">Confirmar contraseña:</label>
+				<input class="formulario" type="password" id="pass2" placeholder="Introduce de nuevo la contraseña">
+			</div>
+			<div>
+				<label for="nombre">Nombre y apellidos:</label>
+				<input class="formulario" type="text" id="nombre" placeholder="Introduce tu nombre y apellidos" required>
+			</div>
+			<div id="container-email">
+				<label for="email">Correo electrónico:</label>
+				<input class="formulario" type="email" id="email" placeholder="Introduce tu correo electrónico" required>
+			</div>
+			<div id="container-submit">
+				<input type="submit" value="Registrar">
+			</div>
+			<div id="container-text">
+				<p>¿Ya tienes una cuenta? <a href="login.html">Iniciar Sesión</a></p>
+			</div>
+		</form>
 	</main>
 	<footer>
 		<p><a href="acerca.html">Contacto</a> <span>&copy; <strong>ViewWorld</strong> 2019</span> <a class="icon-up-circled" href="#cabecera"></a></p>

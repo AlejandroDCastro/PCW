@@ -71,6 +71,7 @@ main {
 	background-color: #BABABA;
 	font-family: 'News Cycle';
 	width: 100%;
+	padding-bottom: 2em;
 }
 
 	main > h2 {
@@ -78,20 +79,54 @@ main {
 		color: #000;
 	}
 
-	main > p {
-		width: 100%;
-		padding: 20px;
-		text-align: center; /*funciona cuando la etiqueta presente es de tipo texto, en cualquier otro caso margin: auto*/
-		font-size: 1.3em;
+footer {
+	width: 100%;
+	background-color: #E3CA10;
+	padding: 1.3em 0;
+}
+
+	footer > p {
+		text-align: center;
+		color: #fff;
+		display: flex;
+		justify-content: space-between;
+		font-size: 1.2em;
 	}
 
-		main > p > a {
+		footer > p > a {
+			margin: 0 1.5em;
+		}
+
+		footer > p > a {
+			color: #fff;
+		}
+
+		footer > p > a:hover, footer > p > a ~ a { /*~ se refiere a un hermano no inmediato de a*/
+			text-decoration: none;
+		}
+
+		footer > p > a ~ a:hover {
 			color: #191919;
 		}
 
-		main > p > a:hover {
-			color: #c0c;
-		}
+
+
+/*CSS PARA LA PÁGINA index.html*/
+
+main > p {
+	width: 100%;
+	padding: 20px;
+	text-align: center; /*funciona cuando la etiqueta presente es de tipo texto, en cualquier otro caso margin: auto*/
+	font-size: 1.3em;
+}
+
+	main > p > a {
+		color: #191919;
+	}
+
+	main > p > a:hover {
+		color: #c0c;
+	}
 
 section {
 	width: 100%;
@@ -157,32 +192,92 @@ section {
 					text-decoration: none;
 				}
 
-footer {
+
+
+
+/*CSS PARA LA PÁGINA login.html Y registro.html*/
+
+.formulario {
 	width: 100%;
-	background-color: #E3CA10;
-	padding: 1.3em 0;
+	height: 3em;
+	padding: 1em;
+	border: none;
+	border-radius: 2%;
+	border-bottom: solid 2px #c0c;
+	background-color: rgba(0, 0, 0, .7);
+	color: #fff;
 }
 
-	footer > p {
-		text-align: center;
-		color: #fff;
-		display: flex;
-		justify-content: space-between;
-		font-size: 1.2em;
+main > form {
+	width: 40%;
+	margin: auto;
+	background-color: rgba(0, 0, 0, .4);
+}
+
+	main > form > div {
+		width: 85%;
+		margin: 0 auto;
 	}
 
-		footer > p > a {
-			margin: 0 1.5em;
-		}
+	main > form > div:not(#container-login) {
+		padding-top: 10px;
+	}
 
-		footer > p > a {
+	main > form > div#container-login {
+		padding-top: 1.5em;
+	}
+
+	main > form > div#container-pass {
+		padding-top: 10px;
+		padding-bottom: 1.7em;
+	}
+
+	main > form > div#container-email {
+		padding-bottom: 1.7em;
+	}
+
+		main > form > div > label {
+			display: block;
 			color: #fff;
 		}
 
-		footer > p > a:hover, footer > p > a ~ a { /*~ se refiere a un hermano no inmediato de a*/
-			text-decoration: none;
+		main > form > div > label:hover {
+			color: #E3CA10;
 		}
 
-		footer > p > a ~ a:hover {
-			color: #191919;
+	main > form > div#container-submit, main > form > div#container-text {
+		padding-bottom: .7em;
+	}
+
+		main > form > div > input[type="submit"] {
+			width: 100%;
+			height: 2.8em;
+			background-color: #c0c;
+			border: none;
+			cursor: pointer;
+			margin-top: .7em;
 		}
+
+		main > form > div > input[type="submit"]:hover {
+			background-color: #FF51FF;
+		}
+
+		main > form > div > p {
+			text-align: center;
+			color: #fff;
+		}
+
+			main > form > div > p > a {
+				color: #fff;
+			}
+
+			main > form > div > p > a:hover {
+				color: #E3CA10;
+				text-decoration: none;
+			}
+
+
+
+
+/*CSS PARA LA PÁGINA registro.html*/
+
