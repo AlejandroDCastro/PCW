@@ -78,6 +78,21 @@ main {
 		color: #000;
 	}
 
+	main > p {
+		width: 100%;
+		padding: 20px;
+		text-align: center; /*funciona cuando la etiqueta presente es de tipo texto, en cualquier otro caso margin: auto*/
+		font-size: 1.3em;
+	}
+
+		main > p > a {
+			color: #191919;
+		}
+
+		main > p > a:hover {
+			color: #c0c;
+		}
+
 section {
 	width: 100%;
 	display: flex;
@@ -85,6 +100,10 @@ section {
 	justify-content: center; /*justifica los elementos flex en el centro del viewport*/
 	text-align: center;
 }
+
+	section > h2 {
+		display: none;
+	}
 
 	section > article {
 		max-width: 300px;
@@ -149,6 +168,7 @@ footer {
 		color: #fff;
 		display: flex;
 		justify-content: space-between;
+		font-size: 1.2em;
 	}
 
 		footer > p > a {
