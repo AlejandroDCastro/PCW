@@ -1,0 +1,19 @@
+* {
+	box-sizing: border-box;
+}
+
+.btn {
+	display: inline-block;
+	border: 2px solid #555;
+	padding: .2em .5em;
+	text-align: center;
+	cursor: pointer;
+}
+
+.btn:hover {
+	box-shadow: 1px 1px 5px #000; /*sombreado del botón*/
+}
+
+.btn:active { /*cuando el botón está pulsado*/
+	box-shadow: 0 0 5px #000;
+}
