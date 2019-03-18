@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="clase07.css">
+	<script src="clase07.js"></script>
+	<script> /*Comprobamos si el usuario está logueado o no*/
+		if(!sessionStorage['usuario'])
+			location.href = 'index.html';
+	</script>
+</head>
+<body>
+	<h1>EJemplos de la práctica</h1>
+	<form onsubmit="return hacerLogin(this);"> <!-- manejador de eventos / this hace refencia al formulario -->
+		<div>
+			<label>Login:</label>
+			<input type="text" name="login" onblur="mostrarValor(this);">
+		</div>
+		<div>
+			<label>Password:</label>
+			<input type="password" name="psw">
+		</div>
+		<div>
+			<label>Etiquetas:</label>
+			<input type="text" list="etiquetas" onfocus="pedirEtiquetas();">
+		</div>
+		<datalist id="etiquetas"></datalist>
+		<div>
+			<input type="submit" value="Enviar">
+			<input type="reset" value="Restaurar">
+		</div>
+	</form>
+	<section>
+		<h2>Fotos Favoritas</h2>
+		<div></div>
+		<footer>
+			<button onclick="pedirFotosFav();">Pedir fotos favoritas</button>
+		</footer>
+	</section>
+</body>
+</html>
