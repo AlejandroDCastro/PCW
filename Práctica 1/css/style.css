@@ -128,7 +128,7 @@ main > p {
 		color: #c0c;
 	}
 
-section {
+section#coleccion-fotos {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap; /*distribuye los elementos flex en varias lineas si es necesario de izquierda a derecha y de arriba a abajo*/
@@ -136,59 +136,59 @@ section {
 	text-align: center;
 }
 
-	section > h2 {
+	section#coleccion-fotos > h2 {
 		display: none;
 	}
 
-	section > article {
+	section#coleccion-fotos > article {
 		max-width: 300px;
 		background-color: #6B6B6B;
 		margin: 30px;
 	}
 
-	section > article:hover {
+	section#coleccion-fotos > article:hover {
 		background-color: #c0c;
 		transition: all .3s;
 	}
 
-		section > article > hgroup {
+		section#coleccion-fotos > article > hgroup {
 			padding: 5px 0;
 		}
 
-			section > article > hgroup > h3 > a, section > article > hgroup > h4 > a {
+			section#coleccion-fotos > article > hgroup > h3 > a, section#coleccion-fotos > article > hgroup > h4 > a {
 				text-decoration: none;
 				color: #fff;
 			}
 
-			section > article > hgroup > h3 > a:hover, section > article > hgroup > h4 > a:hover {
+			section#coleccion-fotos > article > hgroup > h3 > a:hover, section#coleccion-fotos > article > hgroup > h4 > a:hover {
 				color: #E3CA10;
 			}
 
-		section > article > p {
+		section#coleccion-fotos > article > p {
 			padding-bottom: 5px;
 		}
 
-			section > article > p > i {
+			section#coleccion-fotos > article > p > i {
 				padding-left: 7px;
 			}
 
-			section > article > p > i:first-child {
+			section#coleccion-fotos > article > p > i:first-child {
 				color: #E00F0F;
 			}
 
-			section > article > p > i[class="fas fa-star"] {
+			section#coleccion-fotos > article > p > i[class="fas fa-star"] {
 				color: #E4E009;
 			}
 
-			section > article > p > i[class="fas fa-comments"] {
+			section#coleccion-fotos > article > p > i[class="fas fa-comments"] {
 				color: #191919;
 			}
 
-				section > article > p > i:last-child > a,section > article > p > i:last-child {
+				section#coleccion-fotos > article > p > i:last-child > a,section#coleccion-fotos > article > p > i:last-child {
 					color: #0D5208;
 				}
 
-				section > article > p > i:last-child > a:hover {
+				section#coleccion-fotos > article > p > i:last-child > a:hover {
 					text-decoration: none;
 				}
 
@@ -200,7 +200,7 @@ section {
 .formulario {
 	width: 100%;
 	height: 3em;
-	padding: 1em;
+	padding: .8em;
 	border: none;
 	border-radius: 2%;
 	border-bottom: solid 2px #c0c;
@@ -281,3 +281,62 @@ main > form {
 
 /*CSS PARA LA PÁGINA registro.html*/
 
+section#filtros {
+	width: 100%;
+}
+	
+	section#filtros > h3 {
+		margin: .6em 0;
+		text-align: center;
+	}
+
+	section#filtros > h3:last-child {
+		margin-top: 1.3em;
+	}
+
+	section#filtros > form#filtros-texto {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+		section#filtros > form#filtros-texto > div {
+			margin: .3em 1em 1em 1em;
+			width: 20%;
+		}
+
+			section#filtros > form#filtros-texto > div > label {
+				display: block;
+			}
+
+			section#filtros > form#filtros-texto > div > label:hover {
+				color: #c0c;
+			}
+
+	section#filtros > form#filtros-radio {
+		width: 50%;
+		margin: 0 auto;
+	}
+
+		section#filtros > form#filtros-radio > div {
+			display: flex;
+			justify-content: center;
+			padding: 5px 0;
+		}
+
+		section#filtros > form#filtros-radio > div:first-child {
+			border-bottom: solid 1px #c0c;
+		}
+
+		section#filtros > form#filtros-radio > div:last-child {
+			border-top: solid 1px #c0c;
+		}
+
+			section#filtros > form#filtros-radio > div > div {
+				margin: 0 .7em;
+			}
+
+				section#filtros > form#filtros-radio > div > div > span:hover {
+					color: #c0c;
+				}
