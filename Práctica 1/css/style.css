@@ -340,3 +340,18 @@ section#filtros {
 				section#filtros > form#filtros-radio > div > div > span:hover {
 					color: #c0c;
 				}
+
+
+
+
+/*CSS PARA LA PÁGINA foto.html*/
+
+main > section#detalles-foto > h2 {
+	padding: 1.3em 0 2em .6em;
+	color: #000;
+}
+
+main > section#detalles-foto > div {
+	width: 60%;
+	margin: 0 auto;
+}
