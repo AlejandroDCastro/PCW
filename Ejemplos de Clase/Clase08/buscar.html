@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ejemplo 3</title>
+	<link rel="stylesheet" type="text/css" href="estilo03.css">
+	<script type="text/javascript" src="Ejemplo3.js"></script>
+</head>
+<body>
+	<h1>Ejemplo 3</h1>
+	<form onsubmit="return busquedaRapida(this);">
+		<input type="search" name="campo">
+		<input type="submit" value="Buscar">
+	</form>
+		<button onclick="mostrarMensaje();">Mensaje modal</button>
+
+		<section>
+			<h2>Cargar imagen</h2>
+			<label for="fichero">
+				<img src="foto.jpg">
+			</label>
+			<footer>
+				<input type="file" name="fichero" id="fichero" onchange="cargarImagen(this);
+				"> <!--On change maneja un evento cada vez que cambia el contenido de un fichero-->
+				<button onclick="document.getElementById('fichero').click();">Seleccionar fichero</button>
+			</footer>
+		</section>
+</body>
+</html>

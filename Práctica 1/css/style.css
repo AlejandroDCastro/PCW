@@ -352,6 +352,13 @@ main > section#detalles-foto > h2 {
 }
 
 main > section#detalles-foto > div {
-	width: 60%;
-	margin: 0 auto;
+	
 }
+
+	main > section#detalles-foto > div > div {
+		
+	}
+
+		main > section#detalles-foto > div > div > div {
+			
+		}
