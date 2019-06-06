@@ -89,7 +89,7 @@ footer {
 		text-align: center;
 		color: #fff;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-between; /*coloca los elementos flex en posiciones equidistantes*/
 		font-size: 1.2em;
 	}
 
@@ -136,6 +136,7 @@ section#coleccion-fotos {
 	text-align: center;
 }
 
+	/*despues de un section siempre va un h2-h5*/
 	section#coleccion-fotos > h2 {
 		display: none;
 	}
@@ -279,7 +280,7 @@ main > form {
 
 
 
-/*CSS PARA LA PÁGINA registro.html*/
+/*CSS PARA LA PÁGINA buscar.html*/
 
 section#filtros {
 	width: 100%;
@@ -352,13 +353,36 @@ main > section#detalles-foto > h2 {
 }
 
 main > section#detalles-foto > div {
-	
+	width: 100%;
+	display: flex;
+	align-items: center; /*centra los elementos de manera vertical*/
+	justify-content: center; /*centra los elementos de manera horizontal a lo largo del espacio*/
+	margin-top: 1em;
 }
 
-	main > section#detalles-foto > div > div {
-		
+	main > section#detalles-foto > div > a {
+		margin-right: 1em;
 	}
 
-		main > section#detalles-foto > div > div > div {
+	main > section#detalles-foto > div > div {
+		margin-left: 1em;
+	}
+
+		main > section#detalles-foto > div > div > p {
+			margin: 1em;
+		}
+
+main > section#zona-comentarios {
+	width: 90%;
+	margin: auto;
+}
+
+	main > section#zona-comentarios > h3 {
+		text-align: center;
+		margin-top: 3em;
+		margin-bottom: 1em;
+	}
+
+		main > section#zona-comentarios > h3 > div {
 			
 		}
