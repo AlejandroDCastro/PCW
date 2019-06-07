@@ -30,16 +30,16 @@
 	<main>
 		<section id="detalles-foto">
 			<h2>Detalles de Foto</h2>
-			<div id="contenedor-foto">
+			<div>
 				<a href="Images/fotografia.jpg"><img src="Images/fotografia.jpg" alt="Imagen no disponible"></a>
-				<div id="contenedor-detalles">
+				<div>
 					<p>Mares de Cristal</p>
-					<p>By <a href="buscar.html">Alejandro Castro</a></p>
+					<p>By <a id="nom" href="buscar.html">Alejandro Castro</a></p>
 					<p>300 x 299 píxeles</p>
 					<p>0,04 MB</p>
-					<p><a href=""><i class="fas fa-heart"> 1,4k</i></a></p>
-					<p><a href=""><i class="fas fa-star"> 873</i></a></p>
-					<p><a href="#comentarios"><i class="fas fa-comments"> 66</i></a></p>
+					<p><a href=""><i class="fas fa-heart"> <span>1,4k</span></i></a></p>
+					<p><a href=""><i class="fas fa-star"> <span>873</span></i></a></p>
+					<p><a href="#comentarios"><i class="fas fa-comments"> <span>66</span></i></a></p>
 					<p><i class="fas fa-tags">
 						<a href="buscar.html">silencio</a>, 
 						<a href="buscar.html">sentimiento</a>, 
@@ -52,27 +52,29 @@
 		</section>
 		<section id="zona-comentarios">
 			<h3>Escribe tu comentario</h3>
-			<div id="contenedor-input">
+			<div>
 				<div>
 					<label for="titulo">Título:</label>
-					<input type="text" id="titulo" placeholder="Introduce título" maxlength="50">
+					<input class="formulario" type="text" id="titulo" placeholder="Introduce título" maxlength="50">
 				</div>
 				<div>
 					<label for="texto">Texto:</label>
-					<textarea id="texto" maxlength="200"></textarea>
+					<textarea class="formulario" id="texto" maxlength="200"></textarea>
 				</div>
 			</div>
-			<h3 id="comentarios">Comentarios</h3>
-			<article>
-				<h4 class="icon-user">Alejandro Castro Valero <time datetime="2019-03-24T19:40">24-marzo-2019, 09:32h</time></h4>
-				<h5>No es un buen título</h5>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim ipsam excepturi, facere numquam libero sapiente laborum. Eos soluta nulla enim ipsa doloremque, saepe id exercitationem obcaecati, accusamus nemo suscipit possimus blanditiis inventore veniam laboriosam modi voluptate. Voluptatum a exercitationem illum ex iusto at labore sint, distinctio autem, doloremque porro rerum totam, enim unde doloribus dignissimos harum et quod delectus! Qui eaque tempore animi, ab quaerat ex, obcaecati sed nostrum laborum, dolores tempora suscipit, saepe aperiam ipsa. Ipsam non voluptates delectus maiores asperiores repellendus necessitatibus consequuntur tenetur cum eius, atque tempore sed magni optio officia, in natus tempora velit culpa voluptatem.</p>
-			</article>
-			<article>
-				<h4 class="icon-user">Alejandro Castro Valero <time datetime="2019-03-26T19:40">26-marzo-2019, 09:32h</time></h4>
-				<h5>Elementos importantes</h5>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim ipsam excepturi, facere numquam libero sapiente laborum. Eos soluta nulla enim ipsa doloremque, saepe id exercitationem obcaecati, accusamus nemo suscipit possimus blanditiis inventore veniam laboriosam modi voluptate. Voluptatum a exercitationem illum ex iusto at labore sint, distinctio autem, doloremque porro rerum totam, enim unde doloribus dignissimos harum et quod delectus! Qui eaque tempore animi, ab quaerat ex, obcaecati sed nostrum laborum, dolores tempora suscipit, saepe aperiam ipsa. Ipsam non voluptates delectus maiores asperiores repellendus necessitatibus consequuntur tenetur cum eius, atque tempore sed magni optio officia, in natus tempora velit culpa voluptatem.</p>
-			</article>
+			<div>
+				<h3 id="comentarios">Comentarios</h3>
+				<article>
+					<h4 class="icon-user">Alejandro Castro Valero <time datetime="2019-03-24T19:40">24-marzo-2019, 09:32h</time></h4>
+					<h5>No es un buen título</h5>
+					<p>De todos los títulos posibles para pnerle a una foto has tenido que escoger una canción de nuestro Jona Alk. No podía haber sido uno de Ayax y Prok no...</p>
+				</article>
+				<article>
+					<h4 class="icon-user">Alejandro Castro Valero <time datetime="2019-03-26T19:40">26-marzo-2019, 09:32h</time></h4>
+					<h5>Elementos importantes</h5>
+					<p>Lo importante es aprobar la asignatura de MAC cuanto antes, porque está asignatura es imposible de llevar con las otras. Ingeniería Multimedia es más jodida de lo que parece.</p>
+				</article>
+			</div>
 		</section>
 	</main>
 	<footer>

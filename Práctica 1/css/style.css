@@ -3,7 +3,7 @@
 * {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
+	box-sizing: border-box; /*cuando especificamos width o height sera siempre fijo*/
 }
 
 body {
@@ -156,12 +156,14 @@ section#coleccion-fotos {
 			padding: 5px 0;
 		}
 
-			section#coleccion-fotos > article > hgroup > h3 > a, section#coleccion-fotos > article > hgroup > h4 > a {
+			section#coleccion-fotos > article > hgroup > h3 > a,
+			section#coleccion-fotos > article > hgroup > h4 > a {
 				text-decoration: none;
 				color: #fff;
 			}
 
-			section#coleccion-fotos > article > hgroup > h3 > a:hover, section#coleccion-fotos > article > hgroup > h4 > a:hover {
+			section#coleccion-fotos > article > hgroup > h3 > a:hover,
+			section#coleccion-fotos > article > hgroup > h4 > a:hover {
 				color: #E3CA10;
 			}
 
@@ -173,19 +175,25 @@ section#coleccion-fotos {
 				padding-left: 7px;
 			}
 
-			section#coleccion-fotos > article > p > i:first-child {
+			section#coleccion-fotos > article > p > i:first-child,
+			section#detalles-foto > div > div > p > a > i[class="fas fa-heart"] {
 				color: #E00F0F;
 			}
 
-			section#coleccion-fotos > article > p > i[class="fas fa-star"] {
+			section#coleccion-fotos > article > p > i[class="fas fa-star"],
+			section#detalles-foto > div > div > p > a > i[class="fas fa-star"] {
 				color: #E4E009;
 			}
 
-			section#coleccion-fotos > article > p > i[class="fas fa-comments"] {
+			section#coleccion-fotos > article > p > i[class="fas fa-comments"],
+			section#detalles-foto > div > div > p > a > i[class="fas fa-comments"] {
 				color: #191919;
 			}
 
-				section#coleccion-fotos > article > p > i:last-child > a,section#coleccion-fotos > article > p > i:last-child {
+				section#coleccion-fotos > article > p > i:last-child > a,
+				section#coleccion-fotos > article > p > i:last-child,
+				section#detalles-foto > div > div > p > i,
+				section#detalles-foto > div > div > p > i > a {
 					color: #0D5208;
 				}
 
@@ -347,42 +355,99 @@ section#filtros {
 
 /*CSS PARA LA PÁGINA foto.html*/
 
-main > section#detalles-foto > h2 {
-	padding: 1.3em 0 2em .6em;
-	color: #000;
+section#detalles-foto {
+	margin-bottom: 4.5em;
 }
 
-main > section#detalles-foto > div {
-	width: 100%;
-	display: flex;
-	align-items: center; /*centra los elementos de manera vertical*/
-	justify-content: center; /*centra los elementos de manera horizontal a lo largo del espacio*/
-	margin-top: 1em;
-}
-
-	main > section#detalles-foto > div > a {
-		margin-right: 1em;
+	section#detalles-foto > h2 {
+		padding: 1.3em 0 2em .6em;
+		color: #000;
 	}
 
-	main > section#detalles-foto > div > div {
-		margin-left: 1em;
+	section#detalles-foto > div {
+		width: 100%;
+		display: flex;
+		align-items: center; /*centra los elementos de manera vertical*/
+		justify-content: center; /*centra los elementos de manera horizontal a lo largo del espacio*/
+		margin-top: 1em;
 	}
 
-		main > section#detalles-foto > div > div > p {
-			margin: 1em;
+		section#detalles-foto > div > a {
+			margin-right: 1em;
 		}
 
-main > section#zona-comentarios {
-	width: 90%;
+		section#detalles-foto > div > div {
+			margin-left: 1em;
+		}
+
+			section#detalles-foto > div > div > p {
+				margin: .7em;
+			}
+
+				section#detalles-foto > div > div > p > a#nom {
+					color: #000;
+				}
+
+					section#detalles-foto > div > div > p > i > a,
+					section#detalles-foto > div > div > p > a#nom {
+						text-decoration: none;
+					}
+
+					section#detalles-foto > div > div > p > i > a:hover,
+					section#detalles-foto > div > div span:hover,
+					section#detalles-foto > div > div > p > a#nom:hover {
+						color: #c0c;
+						transition: all .3s;
+					}
+
+section#zona-comentarios {
+	width: 75%;
 	margin: auto;
 }
 
-	main > section#zona-comentarios > h3 {
+	section#zona-comentarios > div {
+		width: 80%;
+		margin: auto;
+	}
+
+	section#zona-comentarios > div {
+		width: 80%;
+		margin: auto;
+	}
+
+	section#zona-comentarios h3 {
 		text-align: center;
-		margin-top: 3em;
+		margin-top: 1em;
 		margin-bottom: 1em;
 	}
 
-		main > section#zona-comentarios > h3 > div {
-			
+	section#zona-comentarios > div:last-child {
+		border: solid 2px grey;
+	}
+
+		section#zona-comentarios > div > div {
+			padding: .7em 0;
 		}
+
+			section#zona-comentarios > div > div > label,
+			section#zona-comentarios > div > div > input {
+				display: block;
+			}
+
+			section#zona-comentarios > div > div > label:hover {
+				color: #c0c;
+			}
+
+			section#zona-comentarios > div > div > input {
+				width: 300px;
+			}
+
+			section#zona-comentarios > div > div > textarea {
+				height: 80px;
+			}
+
+			section#zona-comentarios > div > div > input,
+			section#zona-comentarios > div > div > textarea {
+				border: none;
+				border-radius: 0%;
+			}
