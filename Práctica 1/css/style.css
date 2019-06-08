@@ -172,21 +172,24 @@ section#coleccion-fotos {
 		}
 
 			section#coleccion-fotos > article > p > i {
-				padding-left: 7px;
+				padding: 2px 4px;
 			}
 
 			section#coleccion-fotos > article > p > i:first-child,
-			section#detalles-foto > div > div > p > a > i[class="fas fa-heart"] {
+			section#detalles-foto > div > div > p > i[class="fas fa-heart"],
+			section#detalles-foto > div > div > p > i[class="fas fa-heart"] > a {
 				color: #E00F0F;
 			}
 
 			section#coleccion-fotos > article > p > i[class="fas fa-star"],
-			section#detalles-foto > div > div > p > a > i[class="fas fa-star"] {
+			section#detalles-foto > div > div > p > i[class="fas fa-star"],
+			section#detalles-foto > div > div > p > i[class="fas fa-star"] > a {
 				color: #E4E009;
 			}
 
 			section#coleccion-fotos > article > p > i[class="fas fa-comments"],
-			section#detalles-foto > div > div > p > a > i[class="fas fa-comments"] {
+			section#detalles-foto > div > div > p > i[class="fas fa-comments"],
+			section#detalles-foto > div > div > p > i[class="fas fa-comments"] > a {
 				color: #191919;
 			}
 
@@ -219,7 +222,7 @@ section#coleccion-fotos {
 
 main > form {
 	width: 40%;
-	margin: auto;
+	margin: 50px auto;
 	background-color: rgba(0, 0, 0, .4);
 }
 
@@ -402,15 +405,11 @@ section#detalles-foto {
 
 section#zona-comentarios {
 	width: 75%;
-	margin: auto;
+	margin: 5px auto 50px auto;
 }
 
-	section#zona-comentarios > div {
-		width: 80%;
-		margin: auto;
-	}
-
-	section#zona-comentarios > div {
+	section#zona-comentarios > div,
+	section#zona-comentarios > form {
 		width: 80%;
 		margin: auto;
 	}
@@ -421,33 +420,105 @@ section#zona-comentarios {
 		margin-bottom: 1em;
 	}
 
-	section#zona-comentarios > div:last-child {
-		border: solid 2px grey;
+	section#zona-comentarios > div {
+		margin-top: 100px;
+		border-radius: 1%;
+		border: solid 3px rgba(0, 0, 0, .4);
+		background-color: rgba(0, 0, 0, .4);
 	}
 
-		section#zona-comentarios > div > div {
+		section#zona-comentarios > div > h3 {
+			color: #fff;
+		}
+
+		section#zona-comentarios > form > div:not(#buttom-comment) {
 			padding: .7em 0;
 		}
 
-			section#zona-comentarios > div > div > label,
+		section#zona-comentarios > div > article {
+			width: 90%;
+			margin: 60px auto 3em auto;
+			border-radius: 1%;
+			border: solid 2px rgba(0, 0, 0, .4);
+			background-color: #fff;
+		}
+
+		section#zona-comentarios > div > article:hover {
+			border: solid 2px #c0c;
+		}
+
+		section#zona-comentarios > form > div#buttom-comment {
+			margin-top: 20px;
+			display: flex;
+			flex-direction: row-reverse;
+		}
+
+			section#zona-comentarios > form > div#buttom-comment > input {
+				width: 180px;
+				height: 40px;
+				border-radius: 2%;
+				background-color: #c0c;
+				border: none;
+				cursor: pointer;
+			}
+
+			section#zona-comentarios > form > div#buttom-comment > input:hover {
+				background-color: #FF51FF;
+			}
+
+			section#zona-comentarios > div > article > div {
+				width: 95%;
+				margin: auto;
+				padding: .7em 0;
+			}
+
+			section#zona-comentarios > form > div > label,
 			section#zona-comentarios > div > div > input {
 				display: block;
 			}
 
-			section#zona-comentarios > div > div > label:hover {
+			section#zona-comentarios > form > div > label:hover {
 				color: #c0c;
 			}
 
-			section#zona-comentarios > div > div > input {
+			section#zona-comentarios > form > div:not(#buttom-comment) > input {
 				width: 300px;
 			}
 
-			section#zona-comentarios > div > div > textarea {
+			section#zona-comentarios > form > div > textarea {
 				height: 80px;
 			}
 
-			section#zona-comentarios > div > div > input,
-			section#zona-comentarios > div > div > textarea {
+			section#zona-comentarios > form > div:not(#buttom-comment) > input,
+			section#zona-comentarios > form > div > textarea {
 				border: none;
-				border-radius: 0%;
+				border-radius: 1%;
 			}
+
+				section#zona-comentarios > div > article > div > h4 {
+					text-align: center;
+					font-size: 17px;
+				}
+
+				section#zona-comentarios > div > article > div > h5 {
+					font-size: 10px;
+					margin-top: 13px;
+					margin-bottom: 3px;
+				}
+
+
+
+
+/*CSS PARA LA PÁGINA favoritas.html*/
+
+section#coleccion-fotos > article > p#favoritas > i[class="fas fa-star"]:hover {
+	border-radius: 5%;
+	border: solid 2px #E4E009;
+	cursor: pointer;
+}
+
+
+
+
+/*CSS PARA LA PÁGINA nueva.html*/
+
