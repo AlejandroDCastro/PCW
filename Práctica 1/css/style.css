@@ -220,48 +220,49 @@ section#coleccion-fotos {
 	color: #fff;
 }
 
-main > form {
+main > form#form-info {
 	width: 40%;
 	margin: 50px auto;
 	background-color: rgba(0, 0, 0, .4);
 }
 
-	main > form > div {
+	main > form#form-info > div,
+	main > form#new-photo > div {
 		width: 85%;
 		margin: 0 auto;
 	}
 
-	main > form > div:not(#container-login) {
+	main > form#form-info > div:not(#container-login) {
 		padding-top: 10px;
 	}
 
-	main > form > div#container-login {
+	main > form#form-info > div#container-login {
 		padding-top: 1.5em;
 	}
 
-	main > form > div#container-pass {
+	main > form#form-info > div#container-pass {
 		padding-top: 10px;
 		padding-bottom: 1.7em;
 	}
 
-	main > form > div#container-email {
+	main > form#form-info > div#container-email {
 		padding-bottom: 1.7em;
 	}
 
-		main > form > div > label {
+		main > form#form-info > div > label {
 			display: block;
 			color: #fff;
 		}
 
-		main > form > div > label:hover {
+		main > form#form-info > div > label:hover {
 			color: #E3CA10;
 		}
 
-	main > form > div#container-submit, main > form > div#container-text {
+	main > form#form-info > div#container-submit, main > form > div#container-text {
 		padding-bottom: .7em;
 	}
 
-		main > form > div > input[type="submit"] {
+		main > form#form-info > div > input[type="submit"] {
 			width: 100%;
 			height: 2.8em;
 			background-color: #c0c;
@@ -270,20 +271,20 @@ main > form {
 			margin-top: .7em;
 		}
 
-		main > form > div > input[type="submit"]:hover {
+		main > form#form-info > div > input[type="submit"]:hover {
 			background-color: #FF51FF;
 		}
 
-		main > form > div > p {
+		main > form#form-info > div > p {
 			text-align: center;
 			color: #fff;
 		}
 
-			main > form > div > p > a {
+			main > form#form-info > div > p > a {
 				color: #fff;
 			}
 
-			main > form > div > p > a:hover {
+			main > form#form-info > div > p > a:hover {
 				color: #E3CA10;
 				text-decoration: none;
 			}
@@ -522,3 +523,55 @@ section#coleccion-fotos > article > p#favoritas > i[class="fas fa-star"]:hover {
 
 /*CSS PARA LA PÁGINA nueva.html*/
 
+form#new-photo {
+	width: 60%;
+	margin: auto;
+	background-color: rgba(0, 0, 0, .4);
+}
+
+	form#new-photo > div {
+		padding-top: 12px;
+	}
+
+	form#new-photo > div:first-child {
+		padding-top: 35px;
+		padding-bottom: 6px;
+	}
+
+	form#new-photo > div#ficha-foto {
+		margin-top: 12px;
+	}
+
+		form#new-photo > div > textarea {
+			height: 90px;
+		}
+		
+		form#new-photo > div > p {
+			font-size: 13px;
+			margin-top: 2px;
+			margin-left: 5px;
+		}
+
+		form#new-photo > div#ficha-foto > div {
+			margin-top: 5px;
+			display: flex;
+			justify-content: center;
+		}
+
+			form#new-photo > div > div > img {
+				padding: 100px;
+				border-radius: 1%;
+				border: solid 2px;
+				cursor: pointer;
+			}
+
+			form#new-photo > div > div > img:hover {
+				border: solid 2px #c0c;
+				background-color: #fff;
+			}
+
+			form#new-photo > div#ficha-foto > div > div {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+			}

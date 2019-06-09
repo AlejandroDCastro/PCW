@@ -28,7 +28,37 @@
 		</ul>
 	</nav>
 	<main>
-		<h2></h2>
+		<h2>Nueva Fotografía</h2>
+		<form id="new-photo">
+			<div>
+				<label for="title">Título:</label>
+				<input class="formulario" type="text" id="title" required maxlength="100" placeholder="Introduce el título">
+			</div>
+			<div>
+				<label for="description">Descripción:</label>
+				<textarea id="description" class="formulario" maxlength="300" placeholder="Introduce la descripción"></textarea>
+			</div>
+			<div>
+				<label for="tags">Etiquetas:</label>
+				<input class="formulario" type="text" id="tags" required maxlength="100" placeholder="Introduce etiquetas">
+				<p>Asignadas:</p>
+			</div>
+			<div id="ficha-foto">
+				<label>Fotografía:</label>
+				<div>
+					<img src="" alt="No hay foto" width="100" height="100">
+					<div>
+						<div>
+							<input type="file" required>
+						</div>
+						<input type="button" value="Eliminar foto">
+					</div>
+				</div>
+			</div>
+			<div id="container-submit">
+				<input type="submit" value="Subir Foto">
+			</div>
+		</form>
 	</main>
 	<footer>
 		<p><a href="acerca.html">Contacto</a> <span>&copy; <strong>ViewWorld</strong> 2019</span> <a class="icon-up-circled" href="#cabecera"></a></p>
