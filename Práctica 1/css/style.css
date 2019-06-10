@@ -220,6 +220,14 @@ section#coleccion-fotos {
 	color: #fff;
 }
 
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+textarea:hover {
+	border-bottom: solid 2px #FF51FF;
+
+}
+
 main > form#form-info,
 section#acerca-de {
 	width: 40%;
@@ -514,7 +522,8 @@ section#zona-comentarios {
 
 /*CSS PARA LA PÁGINA favoritas.html*/
 
-section#coleccion-fotos > article > p#favoritas > i[class="fas fa-star"]:hover {
+/*en un mismo documento HTML no se pueden repetir atributos name ni id, pero si title*/
+section#coleccion-fotos > article[title="favoritas"] > p > i[class="fas fa-star"]:hover {
 	border-radius: 5%;
 	border: solid 2px #E4E009;
 	cursor: pointer;
@@ -646,3 +655,12 @@ section#acerca-de > div {
 	margin: auto;
 	padding: 25px 0;
 }
+
+	section#acerca-de > div > h3,
+	section#acerca-de > div > h4 {
+		text-align: center;
+	}
+
+	section#acerca-de > div > h4 {
+		margin-bottom: 15px;
+	}
