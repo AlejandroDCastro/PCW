@@ -71,7 +71,7 @@ main {
 	background-color: #BABABA;
 	font-family: 'News Cycle';
 	width: 100%;
-	padding-bottom: 2em;
+	padding-bottom: 50px;
 }
 
 	main > h2 {
@@ -220,7 +220,8 @@ section#coleccion-fotos {
 	color: #fff;
 }
 
-main > form#form-info {
+main > form#form-info,
+section#acerca-de {
 	width: 40%;
 	margin: 50px auto;
 	background-color: rgba(0, 0, 0, .4);
@@ -463,7 +464,8 @@ section#zona-comentarios {
 				cursor: pointer;
 			}
 
-			section#zona-comentarios > form > div#buttom-comment > input:hover {
+			section#zona-comentarios > form > div#buttom-comment > input:hover,
+			form#new-photo > div:last-child > input:hover {
 				background-color: #FF51FF;
 			}
 
@@ -523,9 +525,19 @@ section#coleccion-fotos > article > p#favoritas > i[class="fas fa-star"]:hover {
 
 /*CSS PARA LA PÁGINA nueva.html*/
 
+.ajustarse {
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
 form#new-photo {
 	width: 60%;
-	margin: auto;
+	margin: 50px auto;
 	background-color: rgba(0, 0, 0, .4);
 }
 
@@ -558,20 +570,79 @@ form#new-photo {
 			justify-content: center;
 		}
 
-			form#new-photo > div > div > img {
-				padding: 100px;
+			form#new-photo > div#ficha-foto > div > div:first-child {
+				position: relative;
+				width: 250px;
+				height: 250px;
 				border-radius: 1%;
-				border: solid 2px;
-				cursor: pointer;
-			}
-
-			form#new-photo > div > div > img:hover {
-				border: solid 2px #c0c;
-				background-color: #fff;
-			}
-
-			form#new-photo > div#ficha-foto > div > div {
+				border: solid 2px #000;
 				display: flex;
-				justify-content: center;
-				flex-direction: column;
 			}
+
+			form#new-photo > div#ficha-foto > div > div:first-child:hover {
+				border: solid 2px #444444;
+			}
+
+				form#new-photo > div#ficha-foto > div > div:first-child > img {
+					margin: auto;
+				}
+
+				form#new-photo > div#ficha-foto > div > div:first-child > input,
+				form#new-photo > div#ficha-foto > div > div:last-child > div > input {
+					position: absolute;
+				}
+
+				form#new-photo > div#ficha-foto > div > div:first-child > input:hover,
+				form#new-photo > div#ficha-foto > div > div:last-child > div:hover {
+					cursor: default;
+				}
+
+			form#new-photo > div#ficha-foto > div > div:last-child {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				margin-left: 10px;
+			}
+
+				form#new-photo > div#ficha-foto > div > div:last-child > div {
+					position: relative;
+					background-color: #E3CA10;
+					width: 120px;
+					height: 26px;
+					border-radius: 4%;
+					margin: 10px;
+				}
+
+				form#new-photo > div#ficha-foto > div > div:last-child > div:hover {
+					background-color: #F5E267;
+				}
+
+					form#new-photo > div#ficha-foto > div > div:last-child > div > p {
+						text-align: center;
+						font-size: 14px;
+					}
+
+	form#new-photo > div:last-child {
+		text-align: center;
+		padding: 6em 0 3em 0;
+	}
+
+		form#new-photo > div:last-child > input {
+			width: 180px;
+			height: 40px;
+			border-radius: 2%;
+			background-color: #c0c;
+			border: none;
+			cursor: pointer;
+		}
+
+
+
+
+/*CSS PARA LA PÁGINA acerca.html*/
+
+section#acerca-de > div {
+	width: 85%;
+	margin: auto;
+	padding: 25px 0;
+}

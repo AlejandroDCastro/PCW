@@ -36,7 +36,7 @@
 			</div>
 			<div>
 				<label for="description">Descripción:</label>
-				<textarea id="description" class="formulario" maxlength="300" placeholder="Introduce la descripción"></textarea>
+				<textarea id="description" class="formulario" maxlength="300" placeholder="Introduce la descripción" required></textarea>
 			</div>
 			<div>
 				<label for="tags">Etiquetas:</label>
@@ -46,16 +46,22 @@
 			<div id="ficha-foto">
 				<label>Fotografía:</label>
 				<div>
-					<img src="" alt="No hay foto" width="100" height="100">
+					<div>
+						<img src="Images/fondo-blanco.jpg" alt="No hay foto">
+						<input class="ajustarse" type="file" required>
+					</div>
 					<div>
 						<div>
-							<input type="file" required>
+							<p>Seleccionar foto</p>
+							<input class="ajustarse" type="file" required>
 						</div>
-						<input type="button" value="Eliminar foto">
+						<div>
+							<p>Eliminar foto</p>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div id="container-submit">
+			<div>
 				<input type="submit" value="Subir Foto">
 			</div>
 		</form>
