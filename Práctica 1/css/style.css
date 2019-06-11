@@ -224,8 +224,14 @@ input[type="text"]:hover,
 input[type="email"]:hover,
 input[type="password"]:hover,
 textarea:hover {
-	border-bottom: solid 2px #FF51FF;
+	background-color: #000;
+}
 
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+	border-bottom: solid 2px #fff;
 }
 
 main > form#form-info,
@@ -664,3 +670,18 @@ section#acerca-de > div {
 	section#acerca-de > div > h4 {
 		margin-bottom: 15px;
 	}
+
+
+
+
+/*Reglas media query para Responsive Design*/
+
+@media screen and (max-width: 830px) {
+	li > a {
+		
+	}
+
+	li > a > span {
+		display: none;
+	}
+}
