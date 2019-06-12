@@ -176,18 +176,21 @@ section#coleccion-fotos {
 				padding: 2px 4px;
 			}
 
+			i[class="fas fa-heart"],
 			section#coleccion-fotos > article > p > i:first-child,
 			section#detalles-foto > div > div > p > i[class="fas fa-heart"],
 			section#detalles-foto > div > div > p > i[class="fas fa-heart"] > a {
 				color: #E00F0F;
 			}
 
+			i[class="fas fa-star"],
 			section#coleccion-fotos > article > p > i[class="fas fa-star"],
 			section#detalles-foto > div > div > p > i[class="fas fa-star"],
 			section#detalles-foto > div > div > p > i[class="fas fa-star"] > a {
 				color: #E4E009;
 			}
 
+			i[class="fas fa-comments"],
 			section#coleccion-fotos > article > p > i[class="fas fa-comments"],
 			section#detalles-foto > div > div > p > i[class="fas fa-comments"],
 			section#detalles-foto > div > div > p > i[class="fas fa-comments"] > a {
@@ -366,8 +369,8 @@ section#filtros {
 				margin: 0 .7em;
 			}
 
-				section#filtros > form#filtros-radio > div > div > span:hover {
-					color: #c0c;
+				section#filtros > form#filtros-radio > div > div > i {
+					display: none;
 				}
 
 
@@ -500,11 +503,11 @@ section#zona-comentarios {
 			}
 
 			section#zona-comentarios > form > div:not(#buttom-comment) > input {
-				width: 300px;
+				width: 100%;
 			}
 
 			section#zona-comentarios > form > div > textarea {
-				height: 80px;
+				height: 90px;
 			}
 
 			section#zona-comentarios > form > div:not(#buttom-comment) > input,
@@ -677,7 +680,13 @@ section#acerca-de > div {
 
 /*Reglas media query para Responsive Design*/
 
-/*quita etiquetas del menu y ajusta tamaño del menu*/
+/*
+quita etiquetas del menu y ajusta tamaño del menu
+coloca los inputs de texto de la pagina buscar de manera horizontal
+agranda el espacio reservado para la pagina de nueva foto
+agranda formulario de las paginas de registro y login
+ajusta pagina foto
+*/
 @media all and (max-width: 830px) {
 	nav > ul > li > a {
 		padding: 15px 40px;
@@ -687,6 +696,51 @@ section#acerca-de > div {
 	li > a > span {
 		display: none;
 	}
+
+	section#filtros > form#filtros-texto {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	section#filtros > form#filtros-texto > div {
+		margin: auto;
+		width: 85%;
+	}
+
+	form#new-photo {
+		width: 75%;
+		margin: 50px auto;
+		background-color: rgba(0, 0, 0, .4);
+	}
+
+	main > form#form-info,
+	section#acerca-de {
+		width: 60%;
+		margin: 50px auto;
+		background-color: rgba(0, 0, 0, .4);
+	}
+
+	section#detalles-foto > div {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		margin-top: 1em;
+	}
+
+	section#zona-comentarios {
+		width: 90%;
+		margin: 5px auto 50px auto;
+	}
+
+	section#zona-comentarios > div,
+	section#zona-comentarios > form {
+		width: 90%;
+		margin: auto;
+	}
 }
 
 /*ajusta tamaño del menu*/
@@ -694,6 +748,53 @@ section#acerca-de > div {
 	nav > ul > li > a {
 		padding: 15px 30px;
 		text-decoration: none;
+	}
+}
+
+/*ajusta los radiobutton de la pagina buscar*/
+@media all and (max-width: 690px) {
+	section#filtros > form#filtros-radio > div > div > i {
+		display: inline;
+	}
+
+	section#filtros > form#filtros-radio > div > div > span {
+		display: none;
+	}
+}
+
+/*colocar los selectores de foto debajo de la foto para la pagina de nueva foto*/
+@media all and (max-width: 660px) {
+	form#new-photo > div#ficha-foto > div {
+			margin-top: 5px;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+		}
+
+	form#new-photo > div#ficha-foto > div > div:first-child {
+		position: relative;
+		margin: 5px auto;
+		width: 250px;
+		height: 250px;
+		border-radius: 1%;
+		border: solid 2px #000;
+		display: flex;
+	}
+
+	form#new-photo > div#ficha-foto > div > div:last-child {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin: 10px auto 0px auto;
+	}
+
+	form#new-photo > div#ficha-foto > div > div:last-child > div {
+		position: relative;
+		background-color: #E3CA10;
+		width: 120px;
+		height: 26px;
+		border-radius: 4%;
+		margin: 5px;
 	}
 }
 
@@ -714,23 +815,23 @@ section#acerca-de > div {
 		flex-direction: column;
 	}
 
-		header > h1 {
-			padding: 1.3em 1.3em .3em 1.4em;
-		}
+	header > h1 {
+		padding: 1.3em 1.3em .3em 1.4em;
+	}
 
-		header > p {
-			color: #fff;
-			width: 75%;
-			text-align: center;
-			font-size: 3em;
-			font-family: 'Satisfy';
-			padding-bottom: 20px;
-		}
+	header > p {
+		color: #fff;
+		width: 75%;
+		text-align: center;
+		font-size: 3em;
+		font-family: 'Satisfy';
+		padding-bottom: 20px;
+	}
 }
 
-/*crea menu hamburguesa*/
+/*
+crea menu hamburguesa
+*/
 @media all and (max-width: 479px) {
-	nav > ul > li > a {
-		
-	}
+	
 }
