@@ -37,6 +37,24 @@ header {
 		font-family: 'Satisfy';
 	}
 
+input#chk {
+	display: none;
+}
+
+label[for="chk"] {
+	cursor: pointer;
+	display: none;
+}
+
+	i#btn-menu {
+		font-size: 30px;
+		padding: .4em .5em;
+	}
+
+	i#btn-menu:hover {
+		background-color: rgba(0, 0, 0, .3);
+	}
+
 nav {
 	background-color: #fff;
 	width: 100%;
@@ -57,11 +75,6 @@ nav {
 		nav > ul > li > a {
 			padding: 15px 20px;
 			text-decoration: none;
-		}
-
-		/*para enlaces normales y un enlace que ha sido visitado*/
-		nav > ul > li > a:link,
-		nav > ul > li > a:visited {
 			color: #4d4d33;
 		}
 
@@ -797,5 +810,49 @@ agranda formulario de las paginas de registro y login
 
 /*crea menu hamburguesa*/
 @media all and (max-width: 479px) {
+	label[for="chk"] {
+		display: block;
+	}
+
+	li > a > span {
+		display: inline;
+	}
+
+	nav {
+		position: absolute; /*para que se ajuste a la esquina superior izquierda y se mueva con el simbolo de menu hamburguesa*/
+		width: 70%;
+		background-color: #c0c;
+		margin-left: -80%;
+		transition: all .5s;
+	}
+
+	nav > ul {
+		flex-direction: column;
+		padding: 0;
+	}
+
+	nav > ul > li {
+		border-top: solid 1px #fff;
+	}
+
+	nav > ul > li:first-child {
+		border: none;
+	}
 	
+	nav > ul > li > a {
+		padding: 0;
+		color: #fff;
+		display: block; /*habia que hacer aqui un block para poder manipular el padre y que éste se ajuste a el*/
+		padding: 13px;
+	}
+
+	nav > ul > li > a:hover {
+		color: #4d4d33;
+		background-color: #fff;
+	}
+
+	/*para el nav que es hermano de el input checkbox que esta seleccionado*/
+	input#chk:checked ~ nav {
+		margin-left: 0;
+	}
 }
