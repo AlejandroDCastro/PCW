@@ -72,6 +72,12 @@ nav {
 			flex-grow: 1;
 		}*/
 
+		nav > ul > li#lnueva,
+		nav > ul > li#lfavoritas,
+		nav > ul > li#llogout {
+			display: none;
+		}
+
 		nav > ul > li > a {
 			padding: 15px 20px;
 			text-decoration: none;

@@ -12,7 +12,7 @@
 	<script src="js/script.js"></script>
 	<title>Inicio ViewWorld</title>
 </head>
-<body>
+<body onload="iniciar();">
 	<header id="cabecera">
 		<h1><a href="index.html"><img src="Images/logo.png" alt="ViewWorld"></a></h1> <!-- el elemento más importante del header lo incluimos en un h1 aunque no sea texto, además el logo siempre debe llevarnos a la página de inicio -->
 		<p>Tu página web de fotografías artísticas</p>
@@ -22,13 +22,13 @@
 		<label for="chk"><i id="btn-menu" class="fas fa-bars"></i></label>
 		<nav>
 			<ul>
-				<li id="linicio"><a class="icon-home" href="index.html"><span>Inicio</span></a></li>
-				<li id="lbuscar"><a class="icon-search" href="buscar.html"><span>Buscar</span></a></li>
-				<li id="lnueva"><a class="icon-plus-circled" href="nueva.html"><span>Nueva foto</span></a></li>
-				<li id="lfavoritas"><a class="icon-star" href="favoritas.html"><span>Favoritas</span></a></li>
-				<li id="llogout"><a class="icon-user-times" href="index.html"><span>Logout</span></a></li>
-				<li id="llogin"><a class="icon-user" href="login.html"><span>Login</span></a></li>
-				<li id="lregistro"><a class="icon-user-plus" href="registro.html"><span>Registro</span></a></li>
+				<li><a class="icon-home" href="index.html"><span>Inicio</span></a></li>
+				<li><a class="icon-search" href="buscar.html"><span>Buscar</span></a></li>
+				<li><a class="icon-plus-circled" href="nueva.html"><span>Nueva foto</span></a></li>
+				<li><a class="icon-star" href="favoritas.html"><span>Favoritas</span></a></li>
+				<li><a class="icon-user-times" href="index.html"><span>Logout</span></a></li>
+				<li><a class="icon-user" href="login.html"><span>Login</span></a></li>
+				<li><a class="icon-user-plus" href="registro.html" onclick="logout();"><span>Registro</span></a></li>
 			</ul>
 		</nav>
 	</div>
