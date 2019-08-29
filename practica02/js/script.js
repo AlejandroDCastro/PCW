@@ -124,7 +124,7 @@ function peticionFotos(url) {
 	xhr.open("GET", url, true);
 	xhr.send();
 
-	xhr.onerror() = function() {
+	xhr.onerror = function() {
 		console.log("Error en la petición...");
 		alert("ERROR EN LA PETICIÓN DE LAS FOTOS");
 	};
@@ -136,44 +136,53 @@ function peticionFotos(url) {
 function crearFotos() {
 
 	// Sección donde incluir las nuevas fotos
-	var section_ = document.getElementById("#coleccion-fotos").innerHTML;
+	var section_ = document.getElementById("coleccion-fotos");
 	for (let i=0; i<fotos_index_.FILAS.length; i++) {
 
 		// Creamos las variables correspondientes a los atributos...
-		let titulo_ = fotos_index_.FILAS[i].titulo,
+		var titulo_ = fotos_index_.FILAS[i].titulo,
 			login_ = fotos_index_.FILAS[i].login,
-			etiquetas_ fotos_index_.FILAS[i].etiquetas,
+			etiquetas_ = fotos_index_.FILAS[i].etiquetas,
 			ncomentarios_ = fotos_index_.FILAS[i].ncomentarios,
 			nmegusta_ = fotos_index_.FILAS[i].nmegusta,
-			nfavorita_ = fotos_index_.FILAS[i].nfavorita;
+			nfavorita_ = fotos_index_.FILAS[i].nfavorita,
+			foto_ = fotos_index_.FILAS[i].fichero,
+			id_ = fotos_index_.FILAS[i].id;
 
-		// Creamos la nueva foto
+		// Creamos las etiquetas para la foto...
+		var etiquetas_html_ = "";
+		for (let j=0; j<etiquetas_.length; j++) {
+			let nombre_ = etiquetas_[j].nombre;
+			etiquetas_html_ += `<a href="buscar.html?e=${nombre_}">${nombre_}</a>`;
+			if (j < etiquetas_.length-1) {
+				etiquetas_html_ += `, `;
+			}
+		}
+
+		// Creamos la nueva foto...
 		var nueva_foto_ = 
 			`<article>
 				<hgroup>
 					<h3>
-						<a href="foto.html">Mares de Cristal</a>
+						<a href="foto.html?${id_}" title="${titulo_}">${titulo_}</a>
 					</h3>
 					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
+						<a href="buscar.html?l=${login_}">By ${login_}</a>
 					</h4>
 				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
+				<a href="foto.html?${id_}">
+					<img src="fotos/${foto_}" alt="Fotografía no disponible">
 				</a>
 				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
+					<i class="fas fa-heart"> ${nmegusta_}</i>
+					<i class="fas fa-star"> ${nfavorita_}</i>
+					<i class="fas fa-comments"> ${ncomentarios_}</i>
+					<i class="fas fa-tags">	${etiquetas_html_}</i>
 				</p>
 			</article>`;
+
+		section_.innerHTML += nueva_foto_;
+		console.log("Foto " + foto_ + " creada");
 	}
 }
 
