@@ -9,9 +9,10 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/fontello.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<script src="js/script.js"></script>
 	<title>Login ViewWorld</title>
 </head>
-<body>
+<body onload="iniciar();">
 	<header id="cabecera">
 		<h1><a href="index.html"><img src="Images/logo.png" alt="ViewWorld"></a></h1> <!-- el elemento más importante del header lo incluimos en un h1 aunque no sea texto, además el logo siempre debe llevarnos a la página de inicio -->
 		<p>Tu página web de fotografías artísticas</p>
@@ -25,7 +26,7 @@
 				<li><a class="icon-search" href="buscar.html"><span>Buscar</span></a></li>
 				<li><a class="icon-plus-circled" href="nueva.html"><span>Nueva foto</span></a></li>
 				<li><a class="icon-star" href="favoritas.html"><span>Favoritas</span></a></li>
-				<li><a class="icon-user-times" href="index.html"><span>Logout</span></a></li>
+				<li><a class="icon-user-times" href="index.html" onclick="logout();"><span>Logout</span></a></li>
 				<li><a class="icon-user" href="login.html"><span>Login</span></a></li>
 				<li><a class="icon-user-plus" href="registro.html"><span>Registro</span></a></li>
 			</ul>

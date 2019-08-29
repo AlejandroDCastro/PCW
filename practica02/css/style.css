@@ -702,6 +702,13 @@ section#acerca-de > div {
 
 
 
+/*CSS PARA COMPLEMENTOS*/
+div#div-busqueda-rapida {
+	margin: 15px;
+}
+
+
+
 /*Reglas media query para Responsive Design*/
 
 /*ajusta pagina foto*/
