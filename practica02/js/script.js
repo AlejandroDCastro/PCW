@@ -1,6 +1,7 @@
 
 // Variables globales
 var fotos_index_;
+var info_foto_;
 
 
 // Función que arranca el funcionamiento de la web
@@ -186,9 +187,35 @@ function crearFotos() {
 				</p>
 			</article>`;
 
+		// Incluimos la foto en la página
 		section_.innerHTML += nueva_foto_;
+
+		// Comprobamos si el usuario logueado le ha dado a mg o fv
+		asignarFavMg(id_);
+
 		console.log("Foto " + foto_ + " creada");
 	}
 }
 
 
+
+// Función que remarca el icono de megusta y favoritas de las fotos que el usuario haya asignado
+function asignarFavMg(fotoId) {
+	if (sessionStorage.getItem("usuario")) {
+		let autorizacion_ = sessionStorage.getItem("usuario").login + ":" + sessionStorage.getItem("usuario").token;
+
+		// Hacemos la petición...
+		var xhr = new new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4  &&  xhr.status == 200) {
+
+				info_foto_ = JSON.parse(xhr.responseText);
+				console.log(info_foto_);
+				console.log("TERMINAR MÉTODO asignarFavMg");
+
+			}
+		}
+		xhr.open("GET", "./api/fotos/"+fotoId+"/"+autorizacion_, true);
+		xhr.send();
+	}
+}
