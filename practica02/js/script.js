@@ -140,14 +140,15 @@ function crearFotos() {
 	for (let i=0; i<fotos_index_.FILAS.length; i++) {
 
 		// Creamos las variables correspondientes a los atributos...
-		var titulo_ = fotos_index_.FILAS[i].titulo,
+		let titulo_ = fotos_index_.FILAS[i].titulo,
 			login_ = fotos_index_.FILAS[i].login,
 			etiquetas_ = fotos_index_.FILAS[i].etiquetas,
 			ncomentarios_ = fotos_index_.FILAS[i].ncomentarios,
 			nmegusta_ = fotos_index_.FILAS[i].nmegusta,
 			nfavorita_ = fotos_index_.FILAS[i].nfavorita,
 			foto_ = fotos_index_.FILAS[i].fichero,
-			id_ = fotos_index_.FILAS[i].id;
+			id_ = fotos_index_.FILAS[i].id,
+			ancho_ = fotos_index_.FILAS[i].ancho;
 
 		// Creamos las etiquetas para la foto...
 		var etiquetas_html_ = "";
@@ -158,6 +159,10 @@ function crearFotos() {
 				etiquetas_html_ += `, `;
 			}
 		}
+
+
+		// Reescalamos la foto si es necesario...
+		ancho_ = (parseInt(ancho_) > 300) ? 300 : parseInt(ancho_);
 
 		// Creamos la nueva foto...
 		var nueva_foto_ = 
@@ -171,7 +176,7 @@ function crearFotos() {
 					</h4>
 				</hgroup>
 				<a href="foto.html?${id_}">
-					<img src="fotos/${foto_}" alt="Fotografía no disponible">
+					<img src="fotos/${foto_}" width="${ancho_}" alt="Fotografía no disponible">
 				</a>
 				<p>
 					<i class="fas fa-heart"> ${nmegusta_}</i>
@@ -187,30 +192,3 @@ function crearFotos() {
 }
 
 
-/*
-<article>
-	<hgroup>
-		<h3>
-			<a href="foto.html">Mares de Cristal</a>
-		</h3>
-		<h4>
-			<a href="buscar.html">By Alejandro Castro</a>
-		</h4>
-	</hgroup>
-	<a href="foto.html">
-		<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-	</a>
-	<p>
-		<i class="fas fa-heart"> 1,4k</i>
-		<i class="fas fa-star"> 873</i>
-		<i class="fas fa-comments"> 66</i>
-		<i class="fas fa-tags">
-			<a href="buscar.html">silencio</a>, 
-			<a href="buscar.html">sentimiento</a>, 
-			<a href="buscar.html">soledad</a>, 
-			<a href="buscar.html">hambre</a>, 
-			<a href="buscar.html">juventud</a>
-		</i>
-	</p>
-</article>
-*/
