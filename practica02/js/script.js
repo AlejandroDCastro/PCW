@@ -1,7 +1,9 @@
 
 // Variables globales
-var fotos_index_;
+var fotos_index_; // fotos de la página index acual
 var info_foto_;
+var total_fotos_index_ = 0, total_paginas_index_ = 0;
+var pagina_actual_index_ = 0;
 
 
 // Función que arranca el funcionamiento de la web
@@ -96,7 +98,7 @@ function redireccionaIndex() {
 
 // Función para realizar una búsqueda rápida en la página index
 function busquedaRapida() {
-	var parametros_ = document.querySelector("#div-busqueda-rapida>button").value;
+	var parametros_ = document.querySelector("#div-busqueda-rapida>input").value;
 
 	// Se realizará la búsqueda en la página buscar...
 	location.href = "buscar.html?d=" + parametros_;
@@ -119,7 +121,8 @@ function peticionFotos(url) {
 			// La respuesta es un string que lo convertimos en un objeto JS...
 			fotos_index_ = JSON.parse(xhr.responseText);
 			console.log(fotos_index_);
-			crearFotos();
+			crearFotosIndex();
+			modificarBotoneraIndex();
 		}
 	};
 	xhr.open("GET", url, true);
@@ -134,7 +137,7 @@ function peticionFotos(url) {
 
 
 // Función que muestra las fotos soliciatadas al servidor
-function crearFotos() {
+function crearFotosIndex() {
 
 	// Sección donde incluir las nuevas fotos
 	var section_ = document.getElementById("coleccion-fotos");
@@ -217,5 +220,80 @@ function asignarFavMg(fotoId) {
 		}
 		xhr.open("GET", "./api/fotos/"+fotoId+"/"+autorizacion_, true);
 		xhr.send();
+	}
+}
+
+
+
+// Función que modifica la botonera en función de las fotos existentes en la página
+function modificarBotoneraIndex() {
+
+	// Averiguamos el total de fotos y la cantidad de paginas que las contienen
+	total_fotos_index_ = fotos_index_.TOTAL_COINCIDENCIAS;
+	total_paginas_index_ = Math.ceil(total_fotos_index_/6);
+
+	// Actualizamos...
+	document.getElementById("botonera").innerHTML = `${pagina_actual_index_+1}/${total_paginas_index_}`;
+}
+
+
+
+// Función para ir a la primera página del index
+function paginaPrimeraIndex() {
+	if (pagina_actual_index_ > 0) {
+		pagina_actual_index_ = 0;
+		cambioPagina();
+	}
+}
+
+
+
+// Función para ir a la página anterior de fotos en index
+function paginaAnteriorIndex() {
+	if (pagina_actual_index_ > 0) {
+		pagina_actual_index_--;
+		cambioPagina();
+	}
+}
+
+
+
+// Función para ir a la siguiente página de fotos en index
+function paginaSiguienteIndex() {
+	if (pagina_actual_index_+1 < total_paginas_index_) {
+		pagina_actual_index_++;
+		cambioPagina();
+	}
+}
+
+
+
+// Función para ir a la primera página del index
+function paginaUltimaIndex() {
+	if (pagina_actual_index_+1 < total_paginas_index_) {
+		pagina_actual_index_ = total_paginas_index_ - 1;
+		cambioPagina();
+	}
+}
+
+
+
+// Funcion para cambiar de página
+function cambioPagina() {
+	borrarFotosIndex();
+	peticionFotos('./api/fotos?pag=' + pagina_actual_index_ + '&lpag=6');
+	console.log("Nos movemos a la página " + (pagina_actual_index_+1) + "...");
+}
+
+
+
+
+// Función que borra las fotos que se encuentren en la página de index actual
+function borrarFotosIndex() {
+	var section_ = document.querySelector("section");
+	var num_fotos_ = document.querySelectorAll("article").length;
+
+	for (let i=0; i<num_fotos_; i++) {
+		section_.removeChild(section_.lastChild);
 	}
 }
