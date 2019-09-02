@@ -12,7 +12,7 @@
 	<script src="js/script.js"></script>
 	<title>Favoritas ViewWorld</title>
 </head>
-<body onload="iniciar();">
+<body onload="iniciar();peticionFotosFav();">
 	<header id="cabecera">
 		<h1><a href="index.html"><img src="Images/logo.png" alt="ViewWorld"></a></h1> <!-- el elemento más importante del header lo incluimos en un h1 aunque no sea texto, además el logo siempre debe llevarnos a la página de inicio -->
 		<p>Tu página web de fotografías artísticas</p>
@@ -24,9 +24,9 @@
 			<ul>
 				<li><a class="icon-home" href="index.html"><span>Inicio</span></a></li>
 				<li><a class="icon-search" href="buscar.html"><span>Buscar</span></a></li>
-				<li><a class="icon-plus-circled" href="nueva.html"><span>Nueva foto</span></a></li>
-				<li><a class="icon-star" href="favoritas.html"><span>Favoritas</span></a></li>
-				<li><a class="icon-user-times" href="index.html" onclick="logout();"><span>Logout</span></a></li>
+				<li class="desaparece"><a class="icon-plus-circled" href="nueva.html"><span>Nueva foto</span></a></li>
+				<li class="desaparece"><a class="icon-star" href="favoritas.html"><span>Favoritas</span></a></li>
+				<li class="desaparece"><a class="icon-user-times" href="index.html" onclick="logout();"><span>Logout</span></a></li>
 				<li><a class="icon-user" href="login.html"><span>Login</span></a></li>
 				<li><a class="icon-user-plus" href="registro.html"><span>Registro</span></a></li>
 			</ul>
@@ -35,235 +35,13 @@
 	<main>
 		<h2>Fotos Favoritas</h2>
 		<section id="coleccion-fotos">
-			<h2>Malditos warnings</h2>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
-			<article title="favoritas">
-				<hgroup>
-					<h3>
-						<a href="foto.html">Mares de Cristal</a>
-					</h3>
-					<h4>
-						<a href="buscar.html">By Alejandro Castro</a>
-					</h4>
-				</hgroup>
-				<a href="foto.html">
-					<img src="Images/fotografia.jpg" alt="Fotografía no disponible">
-				</a>
-				<p>
-					<i class="fas fa-heart"> 1,4k</i>
-					<i class="fas fa-star"> 873</i>
-					<i class="fas fa-comments"> 66</i>
-					<i class="fas fa-tags">
-						<a href="buscar.html">silencio</a>, 
-						<a href="buscar.html">sentimiento</a>, 
-						<a href="buscar.html">soledad</a>, 
-						<a href="buscar.html">hambre</a>, 
-						<a href="buscar.html">juventud</a>
-					</i>
-				</p>
-			</article>
+			<h2>Malditos Warnings</h2>
+			
+			<!-- Aquí se sitúan todas las fotos -->
+
 		</section>
 		<p>
-			<a href="index.html"><i class="fas fa-fast-backward"></i></a> <a href="index.html"><i class="fas fa-arrow-left"></i></a> 1/15 <a href="index.html"><i class="fas fa-arrow-right"></i></a> <a href="index.html"><i class="fas fa-fast-forward"></i></a>
+			<a href="javascript:void(0)" onclick="paginaPrimera();"><i class="fas fa-fast-backward"></i></a> <a href="javascript:void(0)" onclick="paginaAnterior();"><i class="fas fa-arrow-left"></i></a> <span id="botonera"></span> <a href="javascript:void(0)" onclick="paginaSiguiente();"><i class="fas fa-arrow-right"></i></a> <a href="javascript:void(0)" onclick="paginaUltima();"><i class="fas fa-fast-forward"></i></a>
 		</p>
 	</main>
 	<footer>

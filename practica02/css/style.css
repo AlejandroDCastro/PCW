@@ -60,10 +60,6 @@ nav {
 	width: 100%;
 }
 
-.desaparece {
-	display: none;
-}
-
 	nav > ul {
 		display: flex;
 		list-style: none;
@@ -709,6 +705,16 @@ section#acerca-de > div {
 /*CSS PARA COMPLEMENTOS*/
 div#div-busqueda-rapida {
 	margin: 15px;
+}
+
+.desaparece {
+	display: none;
+}
+
+#div-buscar > button {
+	width: 100px;
+	display: block;
+	margin: 8px auto;
 }
 
 

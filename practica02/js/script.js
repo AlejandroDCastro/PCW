@@ -1,9 +1,12 @@
 
 // Variables globales
-var fotos_index_; // fotos de la página index acual
+var url_= "";
+var fotos_; // fotos de la página index acual
 var info_foto_;
-var total_fotos_index_ = 0, total_paginas_index_ = 0;
-var pagina_actual_index_ = 0;
+var total_fotos_ = 0, total_paginas_index_ = 0;
+var pagina_actual_ = 0;
+var autorizacion_usuario_; // login y token de usuario
+
 
 
 // Función que arranca el funcionamiento de la web
@@ -108,6 +111,7 @@ function busquedaRapida() {
 
 // Función que carga las fotos mejor valoradas en páginas de seis registros
 function peticionFotos(url) {
+	url_ = url;
 
 	// Abrimos una conexión para pedir datos al servidor web...
 	var xhr = new XMLHttpRequest();
@@ -119,13 +123,13 @@ function peticionFotos(url) {
 		if (xhr.readyState == 4  &&  xhr.status == 200) {
 
 			// La respuesta es un string que lo convertimos en un objeto JS...
-			fotos_index_ = JSON.parse(xhr.responseText);
-			console.log(fotos_index_);
-			crearFotosIndex();
-			modificarBotoneraIndex();
+			fotos_ = JSON.parse(xhr.responseText);
+			console.log(fotos_);
+			crearFotos();
+			modificarBotonera();
 		}
 	};
-	xhr.open("GET", url, true);
+	xhr.open("GET", url_, true);
 	xhr.send();
 
 	xhr.onerror = function() {
@@ -136,23 +140,189 @@ function peticionFotos(url) {
 
 
 
+// Función que carga las fotos marcadas como favoritas por el usuario
+function peticionFotosFav() {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4  &&  xhr.status == 200) {
+			fotos_ = JSON.parse(xhr.responseText);
+			console.log(fotos_);
+			crearFotos();
+			modificarBotonera();
+		}
+	};
+	xhr.open("GET", './api/usuarios/' + autorizacion_usuario_ + '/favoritas', true);
+	xhr.send();
+
+	xhr.onerror = function() {
+		console.log("Error en la petición de favoritas...");
+		alert("ERROR EN LA PETICIÓN DE LAS FOTOS FAVORITAS");
+	};
+}
+
+
+
+// Función que carga las fotos mejor valoradas en páginas de seis registros
+function peticionInicialBuscar() {
+	
+	// Averiguamos el posible tipo de parámetro que viene en la url...
+	var url_ = location.href,
+		ultimoSlash_ = url_.lastIndexOf("?"),
+		tipo_ = url_.substring(ultimoSlash_+1, ultimoSlash_+2),
+		resultado_ = url_.substring(ultimoSlash_+3);
+	var hay_parametros_ = true;
+
+	switch (tipo_) {
+		case "l":
+			document.getElementById("autor").value = resultado_;
+			break;
+		case "e":
+			document.getElementById("etiqueta").value = resultado_;
+			break;
+		case "d":
+			document.getElementById("descripcion").value = corrigeEspacios(resultado_);
+			break;
+		default:
+			hay_parametros_ = false;
+			break;
+	}
+
+	// Si la url contiene algún parámetro ejecutamos...
+	if (hay_parametros_) {
+		peticionFotosBuscar();
+	}
+}
+
+
+
+// Función que envía la petición las fotos en la página buscar en base a los paramétros de búsqueda señalados
+function peticionFotosBuscar() {
+
+	// Se piden fotos si el usuario a insertado algún campo
+	if (creaUrlBuscar()) {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4  &&  xhr.status == 200) {
+				fotos_ = JSON.parse(xhr.responseText);
+				console.log(fotos_);
+				borrarFotos();
+				crearFotos();
+				modificarBotonera();
+			}
+		};
+		xhr.open("GET", url_, true);
+		xhr.send();
+
+		xhr.onerror = function() {
+			console.log("Error en la petición de buscar...");
+			alert("ERROR EN LA PETICIÓN EN LA PÁGINA BUSCAR");
+		};
+	}
+}
+
+
+
+// Función que crea la petición a servidor api RESTfull en función de los parámetros introducidos
+function creaUrlBuscar() {
+	url_ = './api/fotos?';
+	var titulo_ = "", etiquetas_ = "", login_ = "", descripcion_ = "";
+	var radio_button_ = document.querySelectorAll("#filtros-radio>div>div>input");
+	var radio_ = '&op=';
+
+	// Primero añadimos los input de texto...
+	titulo_ = document.getElementById("titulo").value;
+	etiquetas_ = document.getElementById("etiqueta").value;
+	login_ = document.getElementById("autor").value;
+	descripcion_ = document.getElementById("descripcion").value;
+	url_ += (titulo_!="") ? ('t='+titulo_+'&') : "";
+	url_ += (etiquetas_!="") ? ('e='+etiquetas_+'&') : "";
+	url_ += (login_!="") ? ('l='+login_+'&') : "";
+	url_ += (descripcion_!="") ? ('d='+descripcion_) : "";
+
+	// Después los radio button...
+	for (let i=0; i<radio_button_.length; i++) {
+		if (radio_button_[i].checked) {
+			switch (i) {
+				case 0:
+					radio_ += 'megusta-';
+					break;
+				case 1:
+					radio_ += 'favorita-';
+					break;
+				case 2:
+					radio_ += 'comentarios-';
+					break;
+				case 3:
+					radio_ += 'asc';
+					break;
+				case 4:
+					radio_ += 'desc';
+					break;
+			}
+		}
+	}
+	url_ += (radio_!='&op=') ? radio_ : "";
+
+	// Y por último la paginación y devolvemos...
+	if (url_ != './api/fotos?'  &&  url_ != "") {
+		url_ += '&pag=0&lpag=6';
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
+
+// Función que restablece los campos de búsqueda a su valor por defecto
+function restablecerCampos() {
+
+	// Para los radiobutton...
+	var opciones_ = document.querySelectorAll("#filtros-radio>div>div>input");
+	for (let i=0; i<opciones_.length; i++) {
+		opciones_[i].checked = false;
+	}
+
+	// Para los input de texto
+	document.getElementById("titulo").value = "";
+	document.getElementById("descripcion").value = "";
+	document.getElementById("etiqueta").value = "";
+	document.getElementById("autor").value = "";
+}
+
+
+
+// Función que corrige los espacios que vienen mal formateados en la url
+function corrigeEspacios(frase) {
+	var devuelve_ = "";
+	var frase_parseada_ = frase.split("%20");
+
+	for (let i=0; i<frase_parseada_.length; i++) {
+		devuelve_ += (i<frase_parseada_.length-1) ? (frase_parseada_[i]+" ") : frase_parseada_[i];
+	}
+
+	return devuelve_;
+}
+
+
+
 // Función que muestra las fotos soliciatadas al servidor
-function crearFotosIndex() {
+function crearFotos() {
 
 	// Sección donde incluir las nuevas fotos
 	var section_ = document.getElementById("coleccion-fotos");
-	for (let i=0; i<fotos_index_.FILAS.length; i++) {
+	for (let i=0; i<fotos_.FILAS.length; i++) {
 
 		// Creamos las variables correspondientes a los atributos...
-		let titulo_ = fotos_index_.FILAS[i].titulo,
-			login_ = fotos_index_.FILAS[i].login,
-			etiquetas_ = fotos_index_.FILAS[i].etiquetas,
-			ncomentarios_ = fotos_index_.FILAS[i].ncomentarios,
-			nmegusta_ = fotos_index_.FILAS[i].nmegusta,
-			nfavorita_ = fotos_index_.FILAS[i].nfavorita,
-			foto_ = fotos_index_.FILAS[i].fichero,
-			id_ = fotos_index_.FILAS[i].id,
-			ancho_ = fotos_index_.FILAS[i].ancho;
+		let titulo_ = fotos_.FILAS[i].titulo,
+			login_ = fotos_.FILAS[i].login,
+			etiquetas_ = fotos_.FILAS[i].etiquetas,
+			ncomentarios_ = fotos_.FILAS[i].ncomentarios,
+			nmegusta_ = fotos_.FILAS[i].nmegusta,
+			nfavorita_ = fotos_.FILAS[i].nfavorita,
+			foto_ = fotos_.FILAS[i].fichero,
+			id_ = fotos_.FILAS[i].id,
+			ancho_ = fotos_.FILAS[i].ancho;
 
 		// Creamos las etiquetas para la foto...
 		var etiquetas_html_ = "";
@@ -205,7 +375,6 @@ function crearFotosIndex() {
 // Función que remarca el icono de megusta y favoritas de las fotos que el usuario haya asignado
 function asignarFavMg(fotoId) {
 	if (sessionStorage.getItem("usuario")) {
-		let autorizacion_ = sessionStorage.getItem("usuario").login + ":" + sessionStorage.getItem("usuario").token;
 
 		// Hacemos la petición...
 		var xhr = new new XMLHttpRequest();
@@ -218,7 +387,7 @@ function asignarFavMg(fotoId) {
 
 			}
 		}
-		xhr.open("GET", "./api/fotos/"+fotoId+"/"+autorizacion_, true);
+		xhr.open("GET", "./api/fotos/"+fotoId+"/"+autorizacion_usuario_, true);
 		xhr.send();
 	}
 }
@@ -226,52 +395,52 @@ function asignarFavMg(fotoId) {
 
 
 // Función que modifica la botonera en función de las fotos existentes en la página
-function modificarBotoneraIndex() {
+function modificarBotonera() {
 
 	// Averiguamos el total de fotos y la cantidad de paginas que las contienen
-	total_fotos_index_ = fotos_index_.TOTAL_COINCIDENCIAS;
-	total_paginas_index_ = Math.ceil(total_fotos_index_/6);
+	total_fotos_ = fotos_.TOTAL_COINCIDENCIAS;
+	total_paginas_ = Math.ceil(total_fotos_/6);
 
 	// Actualizamos...
-	document.getElementById("botonera").innerHTML = `${pagina_actual_index_+1}/${total_paginas_index_}`;
+	document.getElementById("botonera").innerHTML = `${pagina_actual_+1}/${total_paginas_}`;
 }
 
 
 
-// Función para ir a la primera página del index
-function paginaPrimeraIndex() {
-	if (pagina_actual_index_ > 0) {
-		pagina_actual_index_ = 0;
+// Función para ir a la primera página
+function paginaPrimera() {
+	if (pagina_actual_ > 0) {
+		pagina_actual_ = 0;
 		cambioPagina();
 	}
 }
 
 
 
-// Función para ir a la página anterior de fotos en index
-function paginaAnteriorIndex() {
-	if (pagina_actual_index_ > 0) {
-		pagina_actual_index_--;
+// Función para ir a la página anterior de fotos
+function paginaAnterior() {
+	if (pagina_actual_ > 0) {
+		pagina_actual_--;
 		cambioPagina();
 	}
 }
 
 
 
-// Función para ir a la siguiente página de fotos en index
-function paginaSiguienteIndex() {
-	if (pagina_actual_index_+1 < total_paginas_index_) {
-		pagina_actual_index_++;
+// Función para ir a la siguiente página de fotos
+function paginaSiguiente() {
+	if (pagina_actual_+1 < total_paginas_) {
+		pagina_actual_++;
 		cambioPagina();
 	}
 }
 
 
 
-// Función para ir a la primera página del index
-function paginaUltimaIndex() {
-	if (pagina_actual_index_+1 < total_paginas_index_) {
-		pagina_actual_index_ = total_paginas_index_ - 1;
+// Función para ir a la primera página
+function paginaUltima() {
+	if (pagina_actual_+1 < total_paginas_) {
+		pagina_actual_ = total_paginas_ - 1;
 		cambioPagina();
 	}
 }
@@ -280,17 +449,23 @@ function paginaUltimaIndex() {
 
 // Funcion para cambiar de página
 function cambioPagina() {
-	borrarFotosIndex();
-	peticionFotos('./api/fotos?pag=' + pagina_actual_index_ + '&lpag=6');
-	console.log("Nos movemos a la página " + (pagina_actual_index_+1) + "...");
+
+	// La nueva url...
+	var ultimoSlash_ = url_.indexOf("pag");
+	url_ = url_.substring(0, ultimoSlash_+4) + pagina_actual_ + url_.substring(ultimoSlash_+5);
+
+	// Borramos fotos y hacemos petición...
+	borrarFotos();
+	peticionFotos(url_);
+	console.log("Nos movemos a la página " + (pagina_actual_
+		+1) + "...");
 }
 
 
 
-
-// Función que borra las fotos que se encuentren en la página de index actual
-function borrarFotosIndex() {
-	var section_ = document.querySelector("section");
+// Función que borra las fotos que se encuentren en la página actual
+function borrarFotos() {
+	var section_ = document.querySelector("section#coleccion-fotos");
 	var num_fotos_ = document.querySelectorAll("article").length;
 
 	for (let i=0; i<num_fotos_; i++) {
