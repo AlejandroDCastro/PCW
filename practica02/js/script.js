@@ -1,6 +1,7 @@
 
 // Variables globales
 var url_= "";
+var login_;
 var fotos_; // fotos de la página index acual
 var info_foto_;
 var total_fotos_ = 0, total_paginas_index_ = 0;
@@ -180,7 +181,7 @@ function peticionInicialBuscar() {
 			document.getElementById("etiqueta").value = resultado_;
 			break;
 		case "d":
-			document.getElementById("descripcion").value = corrigeEspacios(resultado_);
+			document.getElementById("descripcion").value = corrigeCodificacion(resultado_);
 			break;
 		default:
 			hay_parametros_ = false;
@@ -191,6 +192,31 @@ function peticionInicialBuscar() {
 	if (hay_parametros_) {
 		peticionFotosBuscar();
 	}
+}
+
+
+
+// Función que corrige los carácteres que no se pueden mostrar con la codificación UTF-8
+function corrigeCodificacion(frase) {
+	var frase_ = frase;
+
+	while (frase_.search("%") > -1) {
+		frase_ = frase_.replace("%20", " ");
+		frase_ = frase_.replace("%C3%A1", "á");
+		frase_ = frase_.replace("%C3%A9", "é");
+		frase_ = frase_.replace("%C3%AD", "í");
+		frase_ = frase_.replace("%C3%B3", "ó");
+		frase_ = frase_.replace("%C3%BA", "ú");
+		frase_ = frase_.replace("%C3%81", "Á");
+		frase_ = frase_.replace("%C3%89", "É");
+		frase_ = frase_.replace("%C3%8D", "Í");
+		frase_ = frase_.replace("%C3%93", "Ó");
+		frase_ = frase_.replace("%C3%9A", "Ú");
+		frase_ = frase_.replace("%C3%B1", "ñ");
+		frase_ = frase_.replace("%C3%91", "Ñ");
+	}
+
+	return frase_;
 }
 
 
@@ -292,20 +318,6 @@ function restablecerCampos() {
 
 
 
-// Función que corrige los espacios que vienen mal formateados en la url
-function corrigeEspacios(frase) {
-	var devuelve_ = "";
-	var frase_parseada_ = frase.split("%20");
-
-	for (let i=0; i<frase_parseada_.length; i++) {
-		devuelve_ += (i<frase_parseada_.length-1) ? (frase_parseada_[i]+" ") : frase_parseada_[i];
-	}
-
-	return devuelve_;
-}
-
-
-
 // Función que muestra las fotos soliciatadas al servidor
 function crearFotos() {
 
@@ -377,7 +389,7 @@ function asignarFavMg(fotoId) {
 	if (sessionStorage.getItem("usuario")) {
 
 		// Hacemos la petición...
-		var xhr = new new XMLHttpRequest();
+		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4  &&  xhr.status == 200) {
 
@@ -400,9 +412,10 @@ function modificarBotonera() {
 	// Averiguamos el total de fotos y la cantidad de paginas que las contienen
 	total_fotos_ = fotos_.TOTAL_COINCIDENCIAS;
 	total_paginas_ = Math.ceil(total_fotos_/6);
+	var pagina_ = (total_paginas_ > 0) ? pagina_actual_+1 : 0;
 
 	// Actualizamos...
-	document.getElementById("botonera").innerHTML = `${pagina_actual_+1}/${total_paginas_}`;
+	document.getElementById("botonera").innerHTML = `${pagina_}/${total_paginas_}`;
 }
 
 
@@ -471,4 +484,27 @@ function borrarFotos() {
 	for (let i=0; i<num_fotos_; i++) {
 		section_.removeChild(section_.lastChild);
 	}
+}
+
+
+
+// Función que permite hacer el login de usuario
+function peticionLogin(formulario) {
+	var xhr = new XMLHttpRequest(),
+		fd = new FormData(formulario);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4  &&  xhr.status == 200) {
+			login_ = JSON.parse(xhr.responseText);
+			console.log(login_);
+			if (login_.RESULTADO == "OK") {
+				console.log("Se ha hecho login de usuario...");
+			} else {
+				console.log("No se ha hecho login de usuario...");
+			}
+		}
+	}
+	xhr.open("POST", './api/sesiones/', true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send(fd);
 }
