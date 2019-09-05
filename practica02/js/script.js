@@ -1,11 +1,11 @@
 
 // Variables globales
 var url_= "";
-var login_;
 var fotos_; // fotos de la página index acual
 var info_foto_;
 var total_fotos_ = 0, total_paginas_index_ = 0;
 var pagina_actual_ = 0;
+var login_usuario_;
 var autorizacion_usuario_; // login y token de usuario
 
 
@@ -489,11 +489,15 @@ function borrarFotos() {
 
 
 // Función que permite hacer el login de usuario
-function peticionLogin(formulario) {
+function peticionLogin(frm) {
 	var xhr = new XMLHttpRequest(),
-		fd = new FormData(formulario);
+		url = './api/sesiones/';
+	var fd = new FormData(frm);
 
-	xhr.onreadystatechange = function() {
+//	fd.append("login", "usuario3");
+//	fd.append("pwd", "usuario3");
+	console.log(document.getElementById("pwd").id);
+/*	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4  &&  xhr.status == 200) {
 			login_ = JSON.parse(xhr.responseText);
 			console.log(login_);
@@ -503,8 +507,19 @@ function peticionLogin(formulario) {
 				console.log("No se ha hecho login de usuario...");
 			}
 		}
-	}
-	xhr.open("POST", './api/sesiones/', true);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	}*/
+	xhr.onload = function() {
+		login_usuario_ = JSON.parse(xhr.responseText);
+			console.log(login_usuario_);
+			if (login_usuario_.RESULTADO == "OK") {
+				console.log("Se ha hecho login de usuario...");
+			} else {
+				console.log("No se ha hecho login de usuario...");
+			}
+	};
+	xhr.open('POST', url, true);
 	xhr.send(fd);
+
+	// Para evitar que la página no se recargue si el login falla
+	return false;
 }
