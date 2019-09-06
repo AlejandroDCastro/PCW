@@ -27,7 +27,7 @@ function iniciar() {
 			resultado_ = url_.substring(ultimoSlash_+1);
 
 		// Comprobamos si el usuario está logueado...
-		if (sessionStorage.getItem("usuario")) {
+		if (sessionStorage.getItem("login")) {
 			console.log("El usuario está logueado...");
 
 			// Si intenta entrar a la login o registro al registrarse o inciar sesion...
@@ -83,8 +83,8 @@ function logout() {
 	if (compatible_api_storage()) {
 		console.log("Cerramos la sesión del Usuario...");
 
-		// Eliminamos la información del sessiontorage del usuario...
-		sessionStorage.removeItem("usuario");
+		// Eliminamos la información del sessiontorage...
+		sessionStorage.clear();
 
 		// Redirigimos la ubicación actual a la página principal despues de dos segundos...
 		setTimeout("redireccionaIndex()",2*1000);
@@ -386,7 +386,7 @@ function crearFotos() {
 
 // Función que remarca el icono de megusta y favoritas de las fotos que el usuario haya asignado
 function asignarFavMg(fotoId) {
-	if (sessionStorage.getItem("usuario")) {
+	if (sessionStorage.getItem("login")) {
 
 		// Hacemos la petición...
 		var xhr = new XMLHttpRequest();
@@ -489,37 +489,78 @@ function borrarFotos() {
 
 
 // Función que permite hacer el login de usuario
-function peticionLogin(frm) {
+function peticionLogin(url) {
 	var xhr = new XMLHttpRequest(),
-		url = './api/sesiones/';
-	var fd = new FormData(frm);
+		fd = new FormData(),
+		inputs_ = document.querySelectorAll("form>div>input");
 
-//	fd.append("login", "usuario3");
-//	fd.append("pwd", "usuario3");
-	console.log(document.getElementById("pwd").id);
-/*	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4  &&  xhr.status == 200) {
-			login_ = JSON.parse(xhr.responseText);
-			console.log(login_);
-			if (login_.RESULTADO == "OK") {
-				console.log("Se ha hecho login de usuario...");
-			} else {
-				console.log("No se ha hecho login de usuario...");
-			}
-		}
-	}*/
+	// Recogemos cada uno de los valores de los inputs...
+	for (let i=0; i<inputs_.length-1; i++){
+		fd.append(inputs_[i].id, inputs_[i].value);
+	}
+
+	xhr.open("POST", url, true);
 	xhr.onload = function() {
 		login_usuario_ = JSON.parse(xhr.responseText);
-			console.log(login_usuario_);
-			if (login_usuario_.RESULTADO == "OK") {
-				console.log("Se ha hecho login de usuario...");
-			} else {
-				console.log("No se ha hecho login de usuario...");
-			}
+		console.log(login_usuario_);
+		if (login_usuario_.RESULTADO == "OK") {
+			console.log("Se ha hecho login de usuario...");
+
+			// Guardamos toda la información que nos devuelve el servidor...
+			sessionStorage.setItem("email", login_usuario_.email);
+			sessionStorage.setItem("login", login_usuario_.login);
+			sessionStorage.setItem("nombre", login_usuario_.nombre);
+			sessionStorage.setItem("token", login_usuario_.token);
+
+			// Creamos la clave de autorizacion del usuario...
+			autorizacion_usuario_ = login_usuario_.login + ":" + login_usuario_.token;
+
+			redireccionaIndex();
+		} else {
+			console.log("No se ha hecho login de usuario...");
+
+			// Mostramos mensaje modal...
+			mostrarMensajeModal(true);
+		}
 	};
-	xhr.open('POST', url, true);
 	xhr.send(fd);
 
 	// Para evitar que la página no se recargue si el login falla
 	return false;
+}
+
+
+
+// Función que mostrar y quitar el mensaje modal al hacer el login
+function mostrarMensajeModal(aparece) {
+	if (aparece) {
+		document.querySelector("body>div+div").style.display = "inline-block";
+	} else {
+		document.querySelector("body>div+div").style.display = "none";
+
+		// Método para poner el foco sin cargar la página
+		document.querySelector("input#login").focus();
+	}
+}
+
+
+
+// Función que comprueba si el login introducido en el registro está disponible
+function disponibilidadLogin() {
+	var xhr = new XMLHttpRequest(),
+		login_ = document.getElementById("login").value,
+		mensaje_ = document.getElementById("mensaje-info");
+
+	xhr.open("GET", "./api/usuarios/" + login_, true);
+	xhr.onload = function() {
+		var respuesta_ = JSON.parse(xhr.responseText);
+		if (respuesta_.DISPONIBLE) {
+			mensaje_.value = "Nombre de usuario disponible";
+			mensaje_.value.style.color = "green";
+		} else {
+			mensaje_.value = "Nombre de usuario no disponible";
+			mensaje_.value.style.color = "red";
+		}
+	}
+	xhr.send();
 }

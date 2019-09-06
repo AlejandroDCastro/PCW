@@ -32,28 +32,31 @@
 			</ul>
 		</nav>
 	</div>
+	<div class="desaparece">
+		<div id="div-mensaje-modal">
+			<div>
+				<p><strong>LOGIN DE USUARIO</strong></p>
+				<P style="color: red;">Login y/o password no válidos</P>
+				<button onclick="mostrarMensajeModal(false);">Cerrar</button>
+			</div>
+		</div>
+	</div>
 	<main>
 		<h2>Inicio de Sesión</h2>
-		<form id="form-info" onsubmit="return peticionLogin(this);">
-<!--			<div id="container-login">
+		<form id="form-info" onsubmit="return peticionLogin('./api/sesiones/');">
+			<div id="container-login">
 				<label for="login">Nombre de usuario:</label>
 				<input class="formulario" type="text" id="login" placeholder="Introduce tu nombre de usuario" autofocus required>
 			</div>
 			<div id="container-pass">
 				<label for="pwd">Contraseña:</label>
-				<input class="formulario" type="password" id="pwd" placeholder="Introduce la constraseña" required>
+				<input class="formulario" type="password" id="pwd" placeholder="Introduce la contraseña" required>
 			</div>
 			<div id="container-submit">
 				<input type="submit" value="Entrar">
 			</div>
 			<div id="container-text">
 				<p>¿Todavía no te has registrado? <a href="registro.html">Registrarse</a></p>
-			</div>-->
-			<label for="login">Nombre de usuario:</label>
-			<input class="formulario" type="text" id="login" placeholder="Introduce tu nombre de usuario" autofocus required>
-			<label for="pwd">Contraseña:</label>
-			<input class="formulario" type="password" id="pwd" placeholder="Introduce la constraseña" required>
-			<input type="submit" value="Entrar">
 			</div>
 		</form>
 	</main>

@@ -318,9 +318,14 @@ section#acerca-de {
 			background-color: #FF51FF;
 		}
 
-		main > form#form-info > div > p {
+		main > form#form-info > div > p:not(#mensaje-info) {
 			text-align: center;
 			color: #fff;
+		}
+
+		main > form#form-info > div > p#mensaje-info {
+			font-size: 13px;
+			color: rgba(0, 0, 0, 0);
 		}
 
 			main > form#form-info > div > p > a {
@@ -715,6 +720,43 @@ div#div-busqueda-rapida {
 	width: 100px;
 	display: block;
 	margin: 8px auto;
+}
+
+#div-mensaje-modal {
+	position: fixed; /*posiciona el elemento en relación a la ventana del navegador*/
+	width: 100%; /*vh hace referencia a la altura del viewport*/
+	height: 100vh;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, .7);
+	display: flex;
+}
+
+#div-mensaje-modal > div {
+	margin: auto; /*ajusta el contenido justo en el centro dentro de una caja flex*/
+	width: 250px;
+	height: 250px;
+	border-radius: 15px;
+	background-color: #fff;
+}
+
+#div-mensaje-modal > div > p {
+	text-align: center;
+	padding: 1.7em 0;
+}
+
+#div-mensaje-modal > div > button {
+	width: 80%;
+	height: 40px;
+	margin-left: 25px;
+	margin-top: 40px;
+	border: none;
+	background-color: #0074B4;
+}
+
+#div-mensaje-modal > div > button:hover {
+	background-color: #48AAF4;
+	cursor: pointer;
 }
 
 
