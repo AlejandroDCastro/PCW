@@ -32,21 +32,31 @@
 			</ul>
 		</nav>
 	</div>
+	<div class="desaparece">
+		<div id="div-mensaje-modal">
+			<div>
+				<p><strong>REGISTRO DE USUARIO</strong></p>
+				<p style="color: red;">Registro efectuado correctamente</p>
+				<button onclick="mostrarMensajeRegistro(false);">Cerrar</button>
+			</div>
+		</div>
+	</div>
 	<main>
 		<h2>Registro</h2>
-		<form id="form-info">
+		<form id="form-info" onsubmit="return peticionRegistro();">
 			<div id="container-login">
 				<label for="login">Nombre de usuario:</label>
-				<input class="formulario" type="text" id="login" placeholder="Introduce el nombre de usuario" required autofocus pattern="^[a-zA-Z][a-zA-Z0-9]{3,19}$" title="Sólo letras y números, sin espacios en blanco, no empezar por número" maxlength="20" onfocusout="disponiblilidadLogin">
-				<p id="mensaje-info">Nombre de usuario disponible</p>
+				<input class="formulario" type="text" id="login" placeholder="Introduce el nombre de usuario" required autofocus pattern="^[a-zA-Z][a-zA-Z0-9]{3,19}$" title="Sólo letras y números, sin espacios en blanco, no empezar por número" maxlength="20" onfocusout="disponibilidadLogin()">
+				<p id="mensaje-info" class="desaparece">Nombre de usuario disponible</p>
 			</div>
 			<div>
 				<label for="pass">Contraseña:</label>
-				<input class="formulario" type="password" id="pass" placeholder="Introduce la contraseña" required title="Utilizar sólo mayúsculas, minúsculas, números y caracteres _ y -, sin espacios en blanco" pattern="^[a-zA-Z0-9/-/_]{6,20}$" maxlength="20">
+				<input class="formulario" type="password" id="pwd" placeholder="Introduce la contraseña" required title="Utilizar sólo mayúsculas, minúsculas, números y caracteres _ y -, sin espacios en blanco" pattern="^[a-zA-Z0-9/-/_]{6,20}$" maxlength="20">
 			</div>
 			<div>
 				<label for="pass2">Confirmar contraseña:</label>
-				<input class="formulario" type="password" id="pass2" placeholder="Introduce de nuevo la contraseña" title="Utilizar sólo mayúsculas, minúsculas, números y caracteres _ y -, sin espacios en blanco" pattern="^[a-zA-Z0-9/-/_]{6,20}$" maxlength="20">
+				<input class="formulario" type="password" id="pwd2" placeholder="Introduce de nuevo la contraseña" title="Utilizar sólo mayúsculas, minúsculas, números y caracteres _ y -, sin espacios en blanco" pattern="^[a-zA-Z0-9/-/_]{6,20}$" maxlength="20">
+				<p id="mensaje-pwd" class="desaparece">Repita la contraseña introducida por favor</p>
 			</div>
 			<div>
 				<label for="nombre">Nombre y apellidos:</label>

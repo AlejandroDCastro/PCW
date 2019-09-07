@@ -328,6 +328,10 @@ section#acerca-de {
 			color: rgba(0, 0, 0, 0);
 		}
 
+		main > form#form-info > div > p#mensaje-pwd {
+			font-size: 13px;
+		}
+
 			main > form#form-info > div > p > a {
 				color: #fff;
 			}

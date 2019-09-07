@@ -5,7 +5,7 @@ var fotos_; // fotos de la página index acual
 var info_foto_;
 var total_fotos_ = 0, total_paginas_index_ = 0;
 var pagina_actual_ = 0;
-var login_usuario_;
+var usuario_;
 var autorizacion_usuario_; // login y token de usuario
 
 
@@ -488,8 +488,8 @@ function borrarFotos() {
 
 
 
-// Función que permite hacer el login de usuario
-function peticionLogin(url) {
+// Función que permite hacer el login y registro de usuario
+function peticionFormulario(url) {
 	var xhr = new XMLHttpRequest(),
 		fd = new FormData(),
 		inputs_ = document.querySelectorAll("form>div>input");
@@ -501,26 +501,12 @@ function peticionLogin(url) {
 
 	xhr.open("POST", url, true);
 	xhr.onload = function() {
-		login_usuario_ = JSON.parse(xhr.responseText);
-		console.log(login_usuario_);
-		if (login_usuario_.RESULTADO == "OK") {
-			console.log("Se ha hecho login de usuario...");
-
-			// Guardamos toda la información que nos devuelve el servidor...
-			sessionStorage.setItem("email", login_usuario_.email);
-			sessionStorage.setItem("login", login_usuario_.login);
-			sessionStorage.setItem("nombre", login_usuario_.nombre);
-			sessionStorage.setItem("token", login_usuario_.token);
-
-			// Creamos la clave de autorizacion del usuario...
-			autorizacion_usuario_ = login_usuario_.login + ":" + login_usuario_.token;
-
-			redireccionaIndex();
+		usuario_ = JSON.parse(xhr.responseText);
+		console.log(usuario_);
+		if (url == "./api/sesiones/") {
+			loginUsuario();
 		} else {
-			console.log("No se ha hecho login de usuario...");
-
-			// Mostramos mensaje modal...
-			mostrarMensajeModal(true);
+			registroUsuario();
 		}
 	};
 	xhr.send(fd);
@@ -531,15 +517,82 @@ function peticionLogin(url) {
 
 
 
-// Función que mostrar y quitar el mensaje modal al hacer el login
-function mostrarMensajeModal(aparece) {
+// Función que permite hacer el login de usuario
+function loginUsuario() {
+	if (usuario_.RESULTADO == "OK") {
+		console.log("Se ha hecho login de usuario...");
+
+		// Guardamos toda la información que nos devuelve el servidor...
+		sessionStorage.setItem("email", usuario_.email);
+		sessionStorage.setItem("login", usuario_.login);
+		sessionStorage.setItem("nombre", usuario_.nombre);
+		sessionStorage.setItem("token", usuario_.token);
+
+		// Creamos la clave de autorizacion del usuario...
+		autorizacion_usuario_ = usuario_.login + ":" + usuario_.token;
+
+		redireccionaIndex();
+	} else {
+		console.log("No se ha hecho login de usuario...");
+
+		// Mostramos mensaje modal...
+		mostrarMensajeLogin(true);
+	}
+}
+
+
+
+// Función que permite hacer el registro de usuario
+function registroUsuario() {
+	if (usuario_.RESULTADO == "OK") {
+		console.log("Se ha realizado el registro de usuario...");
+
+		// Limpiamos formulario...
+		limpiarFormulario();
+
+		// Mostramos mensaje modal...
+		mostrarMensajeRegistro(true);
+	} else {
+		console.log("No se ha realizado el registro de usuario...");
+	}
+}
+
+
+
+// Función que limpia un formulario
+function limpiarFormulario() {
+	var inputs_ = document.querySelectorAll("form>div>input");
+
+	for (let i=0; i<inputs_.length-1; i++) {
+		inputs_[i].value = "";
+	}
+}
+
+
+
+// Función que muestra el mensaje modal que regristro correcto
+function mostrarMensajeRegistro(aparece) {
 	if (aparece) {
 		document.querySelector("body>div+div").style.display = "inline-block";
 	} else {
 		document.querySelector("body>div+div").style.display = "none";
 
-		// Método para poner el foco sin cargar la página
-		document.querySelector("input#login").focus();
+		// Redireccionamos a login
+		location.href = "login.html";
+	}
+}
+
+
+
+// Función que mostrar y quitar el mensaje modal al hacer el login
+function mostrarMensajeLogin(aparece) {
+	if (aparece) {
+		document.querySelector("body>div+div").style.display = "inline-block";
+	} else {
+		document.querySelector("body>div+div").style.display = "none";
+
+		// Devolvemos el foco al campo login...
+		document.getElementById("login").focus();
 	}
 }
 
@@ -551,16 +604,37 @@ function disponibilidadLogin() {
 		login_ = document.getElementById("login").value,
 		mensaje_ = document.getElementById("mensaje-info");
 
-	xhr.open("GET", "./api/usuarios/" + login_, true);
-	xhr.onload = function() {
-		var respuesta_ = JSON.parse(xhr.responseText);
-		if (respuesta_.DISPONIBLE) {
-			mensaje_.value = "Nombre de usuario disponible";
-			mensaje_.value.style.color = "green";
-		} else {
-			mensaje_.value = "Nombre de usuario no disponible";
-			mensaje_.value.style.color = "red";
+	if (login_ != "") {
+		xhr.open("GET", "./api/usuarios/" + login_, true);
+		xhr.onload = function() {
+			var respuesta_ = JSON.parse(xhr.responseText);
+			mensaje_.style.display = "inline-block";
+			if (respuesta_.DISPONIBLE) {
+				mensaje_.innerHTML = "Nombre de usuario disponible";
+				mensaje_.style.color = "#4DF24F";
+			} else {
+				mensaje_.innerHTML = "Nombre de usuario no disponible";
+				mensaje_.style.color = "#FF0808";
+			}
 		}
+		xhr.send();
 	}
-	xhr.send();
+}
+
+
+
+// Función que comprueba si la contraseña repetida coincide con la anterior introducida
+function peticionRegistro() {
+	var pwd1_ = document.getElementById("pwd").value,
+		pwd2_ = document.getElementById("pwd2").value,
+		mensaje_ = document.getElementById("mensaje-pwd");
+
+	if (pwd1_ == pwd2_) {
+		peticionFormulario("./api/usuarios/");
+	} else {
+		mensaje_.style.display = "inline-block";
+		mensaje_.style.color = "#FF0808";
+	}
+
+	return false;
 }

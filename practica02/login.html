@@ -36,14 +36,14 @@
 		<div id="div-mensaje-modal">
 			<div>
 				<p><strong>LOGIN DE USUARIO</strong></p>
-				<P style="color: red;">Login y/o password no válidos</P>
-				<button onclick="mostrarMensajeModal(false);">Cerrar</button>
+				<p style="color: red;">Login y/o password no válidos</p>
+				<button onclick="mostrarMensajeLogin(false);">Cerrar</button>
 			</div>
 		</div>
 	</div>
 	<main>
 		<h2>Inicio de Sesión</h2>
-		<form id="form-info" onsubmit="return peticionLogin('./api/sesiones/');">
+		<form id="form-info" onsubmit="return peticionFormulario('./api/sesiones/');">
 			<div id="container-login">
 				<label for="login">Nombre de usuario:</label>
 				<input class="formulario" type="text" id="login" placeholder="Introduce tu nombre de usuario" autofocus required>
