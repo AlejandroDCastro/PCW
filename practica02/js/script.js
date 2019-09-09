@@ -1,12 +1,11 @@
 
-// Variables globales
+// Variables globales (cada vez que se cargue una página, éstos serán los valores por defecto)
 var url_= "";
 var fotos_; // fotos de la página index acual
 var info_foto_;
 var total_fotos_ = 0, total_paginas_index_ = 0;
 var pagina_actual_ = 0;
 var usuario_;
-var autorizacion_usuario_; // login y token de usuario
 
 
 
@@ -149,10 +148,11 @@ function peticionFotosFav() {
 			fotos_ = JSON.parse(xhr.responseText);
 			console.log(fotos_);
 			crearFotos();
-			modificarBotonera();
+			modificarBotoneraFav();
 		}
 	};
-	xhr.open("GET", './api/usuarios/' + autorizacion_usuario_ + '/favoritas', true);
+	xhr.open("GET", './api/usuarios/' + sessionStorage.getItem("login") + '/favoritas', true);
+	xhr.setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
 	xhr.send();
 
 	xhr.onerror = function() {
@@ -321,12 +321,15 @@ function restablecerCampos() {
 // Función que muestra las fotos soliciatadas al servidor
 function crearFotos() {
 
+	// Array de IDs de las fotos para posterior uso
+	var array_fotos_ = new Array(fotos_.FILAS.length);
+
 	// Sección donde incluir las nuevas fotos
 	var section_ = document.getElementById("coleccion-fotos");
 	for (let i=0; i<fotos_.FILAS.length; i++) {
 
 		// Creamos las variables correspondientes a los atributos...
-		let titulo_ = fotos_.FILAS[i].titulo,
+		var titulo_ = fotos_.FILAS[i].titulo,
 			login_ = fotos_.FILAS[i].login,
 			etiquetas_ = fotos_.FILAS[i].etiquetas,
 			ncomentarios_ = fotos_.FILAS[i].ncomentarios,
@@ -335,6 +338,8 @@ function crearFotos() {
 			foto_ = fotos_.FILAS[i].fichero,
 			id_ = fotos_.FILAS[i].id,
 			ancho_ = fotos_.FILAS[i].ancho;
+
+		array_fotos_[i] = id_;
 
 		// Creamos las etiquetas para la foto...
 		var etiquetas_html_ = "";
@@ -349,6 +354,7 @@ function crearFotos() {
 
 		// Reescalamos la foto si es necesario...
 		ancho_ = (parseInt(ancho_) > 300) ? 300 : parseInt(ancho_);
+
 
 		// Creamos la nueva foto...
 		var nueva_foto_ = 
@@ -372,35 +378,49 @@ function crearFotos() {
 				</p>
 			</article>`;
 
+
 		// Incluimos la foto en la página
 		section_.innerHTML += nueva_foto_;
 
-		// Comprobamos si el usuario logueado le ha dado a mg o fv
-		asignarFavMg(id_);
 
 		console.log("Foto " + foto_ + " creada");
+	}
+
+
+	// Recarmamos aquellas que el usuario le ha dado mg o fav
+	if (sessionStorage.getItem("login")) {
+		asignarFavMg(array_fotos_);
 	}
 }
 
 
 
 // Función que remarca el icono de megusta y favoritas de las fotos que el usuario haya asignado
-function asignarFavMg(fotoId) {
-	if (sessionStorage.getItem("login")) {
+function asignarFavMg(idFotos) {
 
-		// Hacemos la petición...
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4  &&  xhr.status == 200) {
+	// Recogemos todos los iconos...
+	var mg_ = document.querySelectorAll("article>p>i:first-child"),
+		fav_ = document.querySelectorAll("article>p>i:first-child+i");
 
-				info_foto_ = JSON.parse(xhr.responseText);
-				console.log(info_foto_);
-				console.log("TERMINAR MÉTODO asignarFavMg");
+	// Creamos un array de peticiones asíncronas para no sobreescribirlas
+	var xhr = new Array(mg_.length);
 
+	// Hacemos las peticiones...
+	for (let i=0; i<mg_.length; i++) {
+		xhr[i] = new XMLHttpRequest();
+		xhr[i].onload = function() {
+			info_foto_ = JSON.parse(xhr[i].responseText);
+			console.log(info_foto_);
+			if (info_foto_.FILAS[0].usu_favorita == 1) {
+				fav_[i].style.color = "#fff";
+			}
+			if (info_foto_.FILAS[0].usu_megusta == 1) {
+				mg_[i].style.color = "#fff";
 			}
 		}
-		xhr.open("GET", "./api/fotos/"+fotoId+"/"+autorizacion_usuario_, true);
-		xhr.send();
+		xhr[i].open("GET", "./api/fotos/"+idFotos[i], true);
+		xhr[i].setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
+		xhr[i].send();
 	}
 }
 
@@ -415,6 +435,18 @@ function modificarBotonera() {
 	var pagina_ = (total_paginas_ > 0) ? pagina_actual_+1 : 0;
 
 	// Actualizamos...
+	document.getElementById("botonera").innerHTML = `${pagina_}/${total_paginas_}`;
+}
+
+
+
+// Función que modifica la botonera en función de las fotos existentes en la página
+function modificarBotoneraFav() {
+	total_fotos_ = fotos_.FILAS.length;
+	total_paginas_ = Math.ceil(total_fotos_/6);
+
+	var pagina_ = (total_paginas_ > 0) ? pagina_actual_+1 : 0;
+
 	document.getElementById("botonera").innerHTML = `${pagina_}/${total_paginas_}`;
 }
 
@@ -501,6 +533,7 @@ function peticionFormulario(url) {
 
 	xhr.open("POST", url, true);
 	xhr.onload = function() {
+
 		usuario_ = JSON.parse(xhr.responseText);
 		console.log(usuario_);
 		if (url == "./api/sesiones/") {
@@ -527,9 +560,6 @@ function loginUsuario() {
 		sessionStorage.setItem("login", usuario_.login);
 		sessionStorage.setItem("nombre", usuario_.nombre);
 		sessionStorage.setItem("token", usuario_.token);
-
-		// Creamos la clave de autorizacion del usuario...
-		autorizacion_usuario_ = usuario_.login + ":" + usuario_.token;
 
 		redireccionaIndex();
 	} else {
@@ -638,3 +668,6 @@ function peticionRegistro() {
 
 	return false;
 }
+
+
+
