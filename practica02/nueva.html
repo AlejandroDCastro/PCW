@@ -12,7 +12,7 @@
 	<script src="js/script.js"></script>
 	<title>Nueva Foto ViewWorld</title>
 </head>
-<body onload="iniciar();">
+<body onload="iniciar();peticionEtiquetas()" onprogress="cargaEtiquetas();">
 	<header id="cabecera">
 		<h1><a href="index.html"><img src="Images/logo.png" alt="ViewWorld"></a></h1> <!-- el elemento más importante del header lo incluimos en un h1 aunque no sea texto, además el logo siempre debe llevarnos a la página de inicio -->
 		<p>Tu página web de fotografías artísticas</p>
@@ -32,9 +32,27 @@
 			</ul>
 		</nav>
 	</div>
+	<div class="desaparece">
+		<div id="div-mensaje-modal">
+			<div>
+				<p><strong>TAMAÑO FOTO</strong></p>
+				<p style="color: red;">El peso de la foto <= 300KB</p>
+				<button onclick="mostrarMensajeSize(false);">Cerrar</button>
+			</div>
+		</div>
+	</div>
+	<div class="desaparece">
+		<div id="div-mensaje-modal">
+			<div>
+				<p><strong>NUEVA FOTO</strong></p>
+				<p style="color: red;">Se ha subido correctamente la foto</p>
+				<button onclick="mostrarMensajeNueva(false);">Cerrar</button>
+			</div>
+		</div>
+	</div>
 	<main>
 		<h2>Nueva Fotografía</h2>
-		<form id="new-photo">
+		<form id="new-photo" onsubmit="return peticionNuevaFoto();">
 			<div>
 				<label for="title">Título:</label>
 				<input class="formulario" type="text" id="title" required maxlength="100" placeholder="Introduce el título">
@@ -45,23 +63,30 @@
 			</div>
 			<div>
 				<label for="tags">Etiquetas:</label>
-				<input class="formulario" type="text" id="tags" required maxlength="100" placeholder="Introduce etiquetas">
-				<p>Asignadas:</p>
+				<input class="formulario" type="text" id="tags" maxlength="100" placeholder="Introduce etiquetas" list="etiquetas">
+				<datalist id="etiquetas">
+
+					<!-- Aquí van todas las etiquetas -->
+
+				</datalist>
+				<p><strong>Asignadas:</strong> <span></span></p>
+				<button id="btn-mete" onclick="incluirEtiquetas();">Añadir</button>
+				<button id="btn-borra" onclick="borrarEtiquetas();">Borrar</button>
 			</div>
 			<div id="ficha-foto">
 				<label>Fotografía:</label>
 				<div>
 					<div>
-						<img src="Images/fondo-blanco.jpg" alt="No hay foto">
-						<input class="ajustarse" type="file" required>
+						<img src="" alt="No hay foto">
+						<input class="ajustarse" type="file" required onchange="mostrarFoto('');">
 					</div>
 					<div>
 						<div>
 							<p>Seleccionar foto</p>
-							<input class="ajustarse" type="file" required>
+							<input class="ajustarse" type="file" onchange="mostrarFoto('X');">
 						</div>
 						<div>
-							<p>Eliminar foto</p>
+							<p onclick="eliminarFoto();">Eliminar foto</p>
 						</div>
 					</div>
 				</div>

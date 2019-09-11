@@ -3,9 +3,12 @@
 var url_= "";
 var fotos_; // fotos de la página index acual
 var info_foto_;
+var nueva_foto_;
 var total_fotos_ = 0, total_paginas_index_ = 0;
 var pagina_actual_ = 0;
 var usuario_;
+var tags_;
+var input_tags_;
 
 
 
@@ -44,7 +47,7 @@ function iniciar() {
 
 			// Si intenta entrar a favoritas o nueva foto al hacer logout...
 			if (resultado_ == "favoritas.html"  ||  resultado_ == "nueva.html") {
-				document.setTimeout("redireccionaIndex()", 2000);
+				redireccionaIndex();
 			}
 
 			for (let i=0; i<elementos_.length; i++) {
@@ -147,7 +150,7 @@ function peticionFotosFav() {
 		if (xhr.readyState == 4  &&  xhr.status == 200) {
 			fotos_ = JSON.parse(xhr.responseText);
 			console.log(fotos_);
-			crearFotos();
+			crearFotosFav();
 			modificarBotoneraFav();
 		}
 	};
@@ -395,6 +398,82 @@ function crearFotos() {
 
 
 
+// Función que muestra las fotos soliciatadas al servidor
+function crearFotosFav() {
+
+	// Índices para las fotos en función de la página actual
+	var inicio_, final_;
+	inicio_ = pagina_actual_*6;
+	final_ = (inicio_+6 < fotos_.FILAS.length) ? inicio_+6 : fotos_.FILAS.length;
+
+	// Array de IDs de las fotos para posterior uso
+	var array_fotos_ = new Array(final_-inicio_);
+
+	// Sección donde incluir las nuevas fotos
+	var section_ = document.getElementById("coleccion-fotos");
+	for (let i=inicio_; i<final_; i++) {
+
+		// Creamos las variables correspondientes a los atributos...
+		var titulo_ = fotos_.FILAS[i].titulo,
+			login_ = fotos_.FILAS[i].login,
+			etiquetas_ = fotos_.FILAS[i].etiquetas,
+			ncomentarios_ = fotos_.FILAS[i].ncomentarios,
+			nmegusta_ = fotos_.FILAS[i].nmegusta,
+			nfavorita_ = fotos_.FILAS[i].nfavorita,
+			foto_ = fotos_.FILAS[i].fichero,
+			id_ = fotos_.FILAS[i].id,
+			ancho_ = fotos_.FILAS[i].ancho;
+
+		array_fotos_[i] = id_;
+
+		// Creamos las etiquetas para la foto...
+		var etiquetas_html_ = "";
+		for (let j=0; j<etiquetas_.length; j++) {
+			let nombre_ = etiquetas_[j].nombre;
+			etiquetas_html_ += `<a href="buscar.html?e=${nombre_}">${nombre_}</a>`;
+			if (j < etiquetas_.length-1) {
+				etiquetas_html_ += `, `;
+			}
+		}
+
+		// Reescalamos la foto si es necesario...
+		ancho_ = (parseInt(ancho_) > 300) ? 300 : parseInt(ancho_);
+
+		// Creamos la nueva foto...
+		var nueva_foto_ = 
+			`<article>
+				<hgroup>
+					<h3>
+						<a href="foto.html?${id_}" title="${titulo_}">${titulo_}</a>
+					</h3>
+					<h4>
+						<a href="buscar.html?l=${login_}">By ${login_}</a>
+					</h4>
+				</hgroup>
+				<a href="foto.html?${id_}">
+					<img src="fotos/${foto_}" width="${ancho_}" alt="Fotografía no disponible">
+				</a>
+				<p>
+					<i class="fas fa-heart"> ${nmegusta_}</i>
+					<i class="fas fa-star"> ${nfavorita_}</i>
+					<i class="fas fa-comments"> ${ncomentarios_}</i>
+					<i class="fas fa-tags">	${etiquetas_html_}</i>
+				</p>
+			</article>`;
+
+		// Incluimos la foto en la página
+		section_.innerHTML += nueva_foto_;
+
+		console.log("Foto " + foto_ + " creada");
+	}
+
+	// Recarmamos aquellas que el usuario le ha dado mg o fav
+	asignarFavMg(array_fotos_);
+
+}
+
+
+
 // Función que remarca el icono de megusta y favoritas de las fotos que el usuario haya asignado
 function asignarFavMg(idFotos) {
 
@@ -417,7 +496,7 @@ function asignarFavMg(idFotos) {
 			if (info_foto_.FILAS[0].usu_megusta == 1) {
 				mg_[i].style.color = "#fff";
 			}
-		}
+		};
 		xhr[i].open("GET", "./api/fotos/"+idFotos[i], true);
 		xhr[i].setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
 		xhr[i].send();
@@ -462,11 +541,31 @@ function paginaPrimera() {
 
 
 
+// Función para ir a la primera página de favoritas
+function paginaPrimeraFav() {
+	if (pagina_actual_ > 0) {
+		pagina_actual_ = 0;
+		cambioPaginaFav();
+	}
+}
+
+
+
 // Función para ir a la página anterior de fotos
 function paginaAnterior() {
 	if (pagina_actual_ > 0) {
 		pagina_actual_--;
 		cambioPagina();
+	}
+}
+
+
+
+// Función para ir a la página anterior de fotos de favoritas
+function paginaAnteriorFav() {
+	if (pagina_actual_ > 0) {
+		pagina_actual_--;
+		cambioPaginaFav();
 	}
 }
 
@@ -482,11 +581,31 @@ function paginaSiguiente() {
 
 
 
+// Función para ir a la siguiente página de fotos de favoritas
+function paginaSiguienteFav() {
+	if (pagina_actual_+1 < total_paginas_) {
+		pagina_actual_++;
+		cambioPaginaFav();
+	}
+}
+
+
+
 // Función para ir a la primera página
 function paginaUltima() {
 	if (pagina_actual_+1 < total_paginas_) {
 		pagina_actual_ = total_paginas_ - 1;
 		cambioPagina();
+	}
+}
+
+
+
+// Función para ir a la primera página de favoritas
+function paginaUltimaFav() {
+	if (pagina_actual_+1 < total_paginas_) {
+		pagina_actual_ = total_paginas_ - 1;
+		cambioPaginaFav();
 	}
 }
 
@@ -504,6 +623,16 @@ function cambioPagina() {
 	peticionFotos(url_);
 	console.log("Nos movemos a la página " + (pagina_actual_
 		+1) + "...");
+}
+
+
+
+// Funcion para cambiar de página de favoritas
+function cambioPaginaFav() {
+	borrarFotos();
+	crearFotos();
+	var pagina_ = pagina_actual_+1;
+	document.getElementById("botonera").innerHTML = `${pagina_}/${total_paginas_}`;
 }
 
 
@@ -646,7 +775,7 @@ function disponibilidadLogin() {
 				mensaje_.innerHTML = "Nombre de usuario no disponible";
 				mensaje_.style.color = "#FF0808";
 			}
-		}
+		};
 		xhr.send();
 	}
 }
@@ -671,3 +800,184 @@ function peticionRegistro() {
 
 
 
+// Función que muestra todas las etiquetas introducidas por los usuarios en el campo input para asignar etiquetas en nueva.html
+function peticionEtiquetas() {
+	var xhr = new XMLHttpRequest(),
+		lista_ = document.getElementById("etiquetas");
+	input_tags_ = document.getElementById("tags");
+
+	xhr.open("GET", "./api/etiquetas/", true);
+	xhr.onload = function() {
+		tags_ = JSON.parse(xhr.responseText);
+		console.log(tags_);
+
+		// Añadimos las etiquetas al datalist...
+		var tag_;
+		for (let i=0; i<tags_.FILAS.length; i++) {
+			tag_ = tags_.FILAS[i].nombre;
+			lista_.innerHTML += `<option value="${tag_}">`;
+		}
+	};
+	xhr.send();
+}
+
+
+
+// Función que permite añadir etiquetas a la sección de etiquetas
+function cargaEtiquetas() {
+
+	// Escucha por el input cada vez que levanta una tecla en el teclado
+	input_tags_.addEventListener("keyup", function(event) {
+
+		// El código 13 hace referencia a la tecla Return
+		if (event.keyCode == 13) {
+
+			// Cancelamos la acción por defecto, si es necesario
+			event.preventDefault();
+
+			// Clickamos el botón de añadir tag
+			document.getElementById("btn-mete").click();
+		}
+	});
+}
+
+
+
+// Función que permite pulsar el botón para añadir etiquetas
+function incluirEtiquetas() {
+	var seccion_ = document.querySelector("form#new-photo>div>p>span");
+
+	if (seccion_.innerHTML != "") {
+		seccion_.innerHTML += `,`;
+	}
+	seccion_.innerHTML += `${input_tags_.value}`;
+	input_tags_.value = "";
+}
+
+
+
+// Función que limpia la sección de etiquetas asignadas
+function borrarEtiquetas() {
+	document.querySelector("form#new-photo>div>p>span").innerHTML = "";
+}
+
+
+
+// Función que muestra la imagen seleccionada en la página nueva.html
+function mostrarFoto(foto) {
+	var img_ = document.querySelector("div#ficha-foto>div>div>img"),
+		imagen_;
+
+	// Comprobamos desde que input se ha seleccionado la foto...
+	if (foto == "") {
+		imagen_ = document.querySelector("div#ficha-foto>div>div>input");
+	} else {
+		imagen_ = document.querySelector("div#ficha-foto>div>div>div>input");
+	}
+	console.log(imagen_.files[0]);
+
+	// La cargamos en la página...
+	if (imagen_.files[0] != undefined) {
+		if (imagen_.files[0].size/1024 <= 300  &&  comprobarFormato(imagen_.files[0].type)) {
+			img_.src = "Images/" + imagen_.files[0].name;
+			img_.width = "250";
+			document.querySelector("div#ficha-foto>div>div:first-child").style.border = "none";
+		} else {
+			mostrarMensajeSize(true);
+		}
+	}
+}
+
+
+
+// Función para mostrar el mensaje modal de la página nueva.html
+function mostrarMensajeSize(aparece) {
+	var mensaje_ = document.querySelector("body>div+div");
+
+	if (aparece) {
+		mensaje_.style.display = "inline-block";
+	} else {
+		mensaje_.style.display = "none";
+	}
+}
+
+
+
+// Función para comprobar si el formato de la foto a subir tiene una extensión de imagen
+function comprobarFormato(formato) {
+	if (formato == "image/jpeg"  ||  formato == "image/jpg"  ||  formato == "image/png") {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
+
+// Función para eliminar la foto seleccionada
+function eliminarFoto() {
+	document.querySelector("div#ficha-foto>div>div>img").src = "";
+	document.querySelector("div#ficha-foto>div>div:first-child").style.border = "solid 2px #000";
+	document.querySelector("div#ficha-foto>div>div>img").margin = "auto";
+}
+
+
+
+// Función para hacer una llamada post al servidor para la nueva foto
+function peticionNuevaFoto() {
+	var xhr = new XMLHttpRequest(),
+		fd = recogeDatosNueva();
+
+	xhr.open("POST", "./api/fotos/", true);
+	xhr.onload = function() {
+		nueva_foto_ = JSON.parse(xhr.responseText);
+		console.log(nueva_foto_);
+
+		if (nueva_foto_.RESULTADO == "OK") {
+			console.log("Se ha subido correctamente la foto...");
+//			mostrarMensajeNueva(true);
+		} else {
+			console.log("No se ha subido correctamente la foto...");
+		}
+	};
+	xhr.setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
+	xhr.open(fd);
+
+	return false;
+}
+
+
+
+// Función para 
+
+
+
+// Función que recoge los datos del formulario de la página nueva.html
+function recogeDatosNueva() {
+	var fd = new FormData(),
+		etiquetas_ = document.querySelector("form#new-photo>div>p>span"),
+		foto_ = document.querySelector("div#ficha-foto>div>div>input");
+
+	fd.append("titulo", document.getElementById("title").value);
+	fd.append("descripción", document.getElementById("description").value);
+	if (etiquetas_.innerHTML != "") {
+		fd.append("etiquetas", etiquetas_.innerHTML);
+	}
+	fd.append("fichero", foto_.value);
+
+	return fd;
+}
+
+
+
+// Función para mostrar el mensaje modal al hace submit en la página de nueva foto
+function mostrarMensajeNueva(aparece) {
+	var mensaje_ = document.querySelector("body>div:last-child");
+
+	if (aparece) {
+		mensaje_.style.display = "inline-block";
+	} else {
+		mensaje_.style.display = "none";
+		//redireccionaIndex();
+	}
+}
