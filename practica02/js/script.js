@@ -878,7 +878,7 @@ function mostrarFoto(foto) {
 
 	// La cargamos en la página...
 	if (imagen_.files[0] != undefined) {
-		if (imagen_.files[0].size/1024 <= 300  &&  comprobarFormato(imagen_.files[0].type)) {
+		if (imagen_.files[0].size/1024 <= 300) {
 			img_.src = "Images/" + imagen_.files[0].name;
 			img_.width = "250";
 			document.querySelector("div#ficha-foto>div>div:first-child").style.border = "none";
@@ -903,17 +903,6 @@ function mostrarMensajeSize(aparece) {
 
 
 
-// Función para comprobar si el formato de la foto a subir tiene una extensión de imagen
-function comprobarFormato(formato) {
-	if (formato == "image/jpeg"  ||  formato == "image/jpg"  ||  formato == "image/png") {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-
-
 // Función para eliminar la foto seleccionada
 function eliminarFoto() {
 	document.querySelector("div#ficha-foto>div>div>img").src = "";
@@ -928,9 +917,12 @@ function peticionNuevaFoto() {
 	var xhr = new XMLHttpRequest(),
 		fd = recogeDatosNueva();
 
+		console.log(sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
+
 	xhr.open("POST", "./api/fotos/", true);
 	xhr.onload = function() {
-		nueva_foto_ = JSON.parse(xhr.responseText);
+		console.log(xhr.responseText);
+/*		nueva_foto_ = JSON.parse(xhr.responseText);
 		console.log(nueva_foto_);
 
 		if (nueva_foto_.RESULTADO == "OK") {
@@ -938,10 +930,11 @@ function peticionNuevaFoto() {
 //			mostrarMensajeNueva(true);
 		} else {
 			console.log("No se ha subido correctamente la foto...");
-		}
+		}*/
+		return false;
 	};
 	xhr.setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
-	xhr.open(fd);
+	xhr.send(fd);
 
 	return false;
 }
@@ -954,16 +947,16 @@ function peticionNuevaFoto() {
 
 // Función que recoge los datos del formulario de la página nueva.html
 function recogeDatosNueva() {
-	var fd = new FormData(),
+	let fd = new FormData(),
 		etiquetas_ = document.querySelector("form#new-photo>div>p>span"),
 		foto_ = document.querySelector("div#ficha-foto>div>div>input");
 
 	fd.append("titulo", document.getElementById("title").value);
-	fd.append("descripción", document.getElementById("description").value);
+	fd.append("descripcion", document.getElementById("description").value);
 	if (etiquetas_.innerHTML != "") {
 		fd.append("etiquetas", etiquetas_.innerHTML);
 	}
-	fd.append("fichero", foto_.value);
+	fd.append("fichero", foto_.files[0]);
 
 	return fd;
 }
