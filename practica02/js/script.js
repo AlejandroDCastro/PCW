@@ -9,6 +9,7 @@ var pagina_actual_ = 0;
 var usuario_;
 var tags_;
 var input_tags_;
+var comentarios_;
 
 
 
@@ -345,14 +346,7 @@ function crearFotos() {
 		array_fotos_[i] = id_;
 
 		// Creamos las etiquetas para la foto...
-		var etiquetas_html_ = "";
-		for (let j=0; j<etiquetas_.length; j++) {
-			let nombre_ = etiquetas_[j].nombre;
-			etiquetas_html_ += `<a href="buscar.html?e=${nombre_}">${nombre_}</a>`;
-			if (j < etiquetas_.length-1) {
-				etiquetas_html_ += `, `;
-			}
-		}
+		var etiquetas_html_ = crearEtiquetas(etiquetas_);
 
 
 		// Reescalamos la foto si es necesario...
@@ -398,6 +392,23 @@ function crearFotos() {
 
 
 
+// Función que crea las etiquetas para que se visualicen en la página html
+function crearEtiquetas(etiquetas) {
+	var etiquetas_html_ = "";
+
+	for (let j=0; j<etiquetas.length; j++) {
+		let nombre_ = etiquetas[j].nombre;
+		etiquetas_html_ += `<a href="buscar.html?e=${nombre_}">${nombre_}</a>`;
+		if (j < etiquetas.length-1) {
+			etiquetas_html_ += `, `;
+		}
+	}
+
+	return etiquetas_html_;
+}
+
+
+
 // Función que muestra las fotos soliciatadas al servidor
 function crearFotosFav() {
 
@@ -427,14 +438,7 @@ function crearFotosFav() {
 		array_fotos_[i] = id_;
 
 		// Creamos las etiquetas para la foto...
-		var etiquetas_html_ = "";
-		for (let j=0; j<etiquetas_.length; j++) {
-			let nombre_ = etiquetas_[j].nombre;
-			etiquetas_html_ += `<a href="buscar.html?e=${nombre_}">${nombre_}</a>`;
-			if (j < etiquetas_.length-1) {
-				etiquetas_html_ += `, `;
-			}
-		}
+		var etiquetas_html_ = crearEtiquetas(etiquetas_);
 
 		// Reescalamos la foto si es necesario...
 		ancho_ = (parseInt(ancho_) > 300) ? 300 : parseInt(ancho_);
@@ -917,21 +921,18 @@ function peticionNuevaFoto() {
 	var xhr = new XMLHttpRequest(),
 		fd = recogeDatosNueva();
 
-		console.log(sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
-
 	xhr.open("POST", "./api/fotos/", true);
 	xhr.onload = function() {
 		console.log(xhr.responseText);
-/*		nueva_foto_ = JSON.parse(xhr.responseText);
+		nueva_foto_ = JSON.parse(xhr.responseText);
 		console.log(nueva_foto_);
 
 		if (nueva_foto_.RESULTADO == "OK") {
 			console.log("Se ha subido correctamente la foto...");
-//			mostrarMensajeNueva(true);
+			mostrarMensajeNueva(true);
 		} else {
 			console.log("No se ha subido correctamente la foto...");
-		}*/
-		return false;
+		}
 	};
 	xhr.setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
 	xhr.send(fd);
@@ -941,15 +942,11 @@ function peticionNuevaFoto() {
 
 
 
-// Función para 
-
-
-
 // Función que recoge los datos del formulario de la página nueva.html
 function recogeDatosNueva() {
 	let fd = new FormData(),
 		etiquetas_ = document.querySelector("form#new-photo>div>p>span"),
-		foto_ = document.querySelector("div#ficha-foto>div>div>input");
+		foto_ = document.querySelector("#ficha-foto>div>div>input");
 
 	fd.append("titulo", document.getElementById("title").value);
 	fd.append("descripcion", document.getElementById("description").value);
@@ -971,6 +968,129 @@ function mostrarMensajeNueva(aparece) {
 		mensaje_.style.display = "inline-block";
 	} else {
 		mensaje_.style.display = "none";
-		//redireccionaIndex();
+		redireccionaIndex();
 	}
 }
+
+
+
+// Función que carga la foto de la página foto.html
+function peticionFoto() {
+	var url_ = location.href,
+		ultimoSlash_ = url_.lastIndexOf("?"),
+		id_ = url_.substring(ultimoSlash_+1);
+
+	// Si se intenta acceder a la página sin id de foto...
+	if (id_ == "") {
+		redireccionaIndex();
+	} else {
+
+		// En caso contrario realizamos la petición...
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "./api/fotos/" + id_, true);
+		xhr.onload = function() {
+			info_foto_ = JSON.parse(xhr.responseText);
+			if (info_foto_.RESULTADO == "OK") {
+				console.log("Petición de la foto correcta...");
+				console.log(info_foto_);
+				mostrarInfoFoto();
+			} else {
+				console.log("Petición de la foto incorrecta...");
+			}
+		};
+		xhr.send();
+	}
+}
+
+
+
+function mostrarInfoFoto() {
+	var fichero_ = info_foto_.FILAS[0].fichero,
+		titulo_ = info_foto_.FILAS[0].titulo,
+		login_ = info_foto_.FILAS[0].login,
+		alto_ = info_foto_.FILAS[0].alto,
+		ancho_ = info_foto_.FILAS[0].ancho,
+		peso_ = info_foto_.FILAS[0].peso,
+		nmegusta_ = info_foto_.FILAS[0].nmegusta,
+		nfavorita_ = info_foto_.FILAS[0].nfavorita,
+		ncomentarios_ = info_foto_.FILAS[0].ncomentarios,
+		etiquetas_ = info_foto_.FILAS[0].etiquetas,
+		id_ = info_foto_.FILAS[0].id,
+		section_ = document.getElementById("detalles-foto");
+
+	// Creamos las etiquetas para la foto...
+	var etiquetas_html_ = crearEtiquetas(etiquetas_);
+
+	// Reescalamos la foto si es necesario...
+	ancho_2_ = (parseInt(ancho_) > 400) ? 400 : parseInt(ancho_);
+
+	// Pasamos el peso de bytes a Kbytes...
+	peso_ = Math.round(parseInt(peso_)/1024);
+
+	section_.innerHTML += `
+		<div>
+			<a href="fotos/${fichero_}"><img src="fotos/${fichero_}" alt="Imagen no disponible" width="${ancho_2_}"></a>
+			<div>
+				<p>${titulo_}</p>
+				<p>By <a id="nom" href="buscar.html?l=${login_}">${login_}</a></p>
+				<p>${ancho_} x ${alto_}</p>
+				<p>${peso_} KB</p>
+				<p><i class="fas fa-heart"> <a href="">${nmegusta_}</a></i></p>
+				<p><i class="fas fa-star"> <a href="">${nfavorita_}</a></i></p>
+				<p><i class="fas fa-comments"> <a href="#comentarios">${ncomentarios_}</a></i></p>
+				<p><i class="fas fa-tags">${etiquetas_html_}</i></p>
+			</div>
+		</div>`;
+
+	// Ahora cargamos los comentarios...
+	peticionComentarios(id_);
+}
+
+
+
+// Función para cargar los comentarios de la foto
+function peticionComentarios(id) {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open("GET", "./api/fotos/" + id + "/comentarios", true);
+	xhr.onload = function() {
+		comentarios_ = JSON.parse(xhr.responseText);
+		if (comentarios_.RESULTADO == "OK") {
+			console.log("Petición de los comentarios de la foto correcta...");
+			console.log(comentarios_);
+			crearComentarios();
+		} else {
+			console.log("Petición de los comentarios de la foto incorrecta...");
+		}
+	};
+	xhr.send();
+}
+
+
+
+// Función que crea los comentarios posteados en una foto
+function crearComentarios() {
+	var seccion_ = document.querySelector("#zona-comentarios>div");
+
+	for (let i=0; i<comentarios_.FILAS.length; i++) {
+		var fechahora_ = comentarios_.FILAS[i].fechahora,
+			login_ = comentarios_.FILAS[i].login,
+			texto_ = comentarios_.FILAS[i].texto,
+			titulo_ = comentarios_.FILAS[i].titulo;
+
+		seccion_.innerHTML += `
+			<h4>${titulo_}</h4>
+			<h5 class="icon-user">${login_} <time datetime="2019-03-24T19:40">${fechahora_}</time></h5>
+			<p>${texto_}</p>`;
+	}
+}
+
+/*
+	<article>
+		<div>
+			<h4>No es un buen título</h4>
+			<h5 class="icon-user">Alejandro Castro Valero <time datetime="2019-03-24T19:40">24-marzo-2019, 09:32h</time></h5>
+			<p>De todos los títulos posibles para ponerle a una foto has tenido que escoger una canción de nuestro Jona Alk. No podía haber sido uno de Ayax y Prok no...</p>
+		</div>
+	</article>
+*/
