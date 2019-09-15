@@ -10,6 +10,7 @@ var usuario_;
 var tags_;
 var input_tags_;
 var comentarios_;
+var favorita_ = -1, megusta_ = -1;
 
 
 
@@ -1004,6 +1005,7 @@ function peticionFoto() {
 
 
 
+// Función para cargar la sección de la foto en la página foto.html
 function mostrarInfoFoto() {
 	var fichero_ = info_foto_.FILAS[0].fichero,
 		titulo_ = info_foto_.FILAS[0].titulo,
@@ -1035,8 +1037,8 @@ function mostrarInfoFoto() {
 				<p>By <a id="nom" href="buscar.html?l=${login_}">${login_}</a></p>
 				<p>${ancho_} x ${alto_}</p>
 				<p>${peso_} KB</p>
-				<p><i class="fas fa-heart"> <a href="">${nmegusta_}</a></i></p>
-				<p><i class="fas fa-star"> <a href="">${nfavorita_}</a></i></p>
+				<p id="mg"><i class="fas fa-heart"> <a onclick="asignarMgFav('mg');" class="cursor">${nmegusta_}</a></i></p>
+				<p id="fav"><i class="fas fa-star"> <a onclick="asignarMgFav('fav');" class="cursor">${nfavorita_}</a></i></p>
 				<p><i class="fas fa-comments"> <a href="#comentarios">${ncomentarios_}</a></i></p>
 				<p><i class="fas fa-tags">${etiquetas_html_}</i></p>
 			</div>
@@ -1058,7 +1060,7 @@ function peticionComentarios(id) {
 		if (comentarios_.RESULTADO == "OK") {
 			console.log("Petición de los comentarios de la foto correcta...");
 			console.log(comentarios_);
-			crearComentarios();
+			crearComentarios(id);
 		} else {
 			console.log("Petición de los comentarios de la foto incorrecta...");
 		}
@@ -1069,7 +1071,7 @@ function peticionComentarios(id) {
 
 
 // Función que crea los comentarios posteados en una foto
-function crearComentarios() {
+function crearComentarios(id) {
 	var seccion_ = document.querySelector("#zona-comentarios>div");
 
 	for (let i=0; i<comentarios_.FILAS.length; i++) {
@@ -1079,18 +1081,99 @@ function crearComentarios() {
 			titulo_ = comentarios_.FILAS[i].titulo;
 
 		seccion_.innerHTML += `
-			<h4>${titulo_}</h4>
-			<h5 class="icon-user">${login_} <time datetime="2019-03-24T19:40">${fechahora_}</time></h5>
-			<p>${texto_}</p>`;
+			<article>
+				<div>
+					<h4>${titulo_}</h4>
+					<h5 class="icon-user">${login_} <time datetime="2019-03-24T19:40">${fechahora_}</time></h5>
+					<p>${texto_}</p>
+				</div>
+			<article>`;
+	}
+
+	// Ahora marcamos los botones de mg y fav...
+	if (sessionStorage.getItem("login")) {
+		marcarMgFav(id);
 	}
 }
 
+
+
+// Función para marcar como favorita o megusta si el usuario la tiene asignada
+function marcarMgFav(id) {
+	var xhr = new XMLHttpRequest(),
+		mg_ = document.querySelector("#mg>i>a"),
+		fav_ = document.querySelector("#fav>i>a");
+
+	xhr.open("GET", "./api/fotos/" + id, true);
+	xhr.onload = function() {
+		var aux_ = JSON.parse(xhr.responseText);
+		console.log(aux_);
+		megusta_ = aux_.FILAS[0].usu_megusta;
+		favorita_ = aux_.FILAS[0].usu_favorita;
+
+		// Cambiamos el color de marcado y el contenido...
+		if (megusta_ == 1) {
+			mg_.style.color = "#fff";
+		} else {
+			mg_.style.color = "#E00F0F";
+		}
+		if (favorita_ == 1) {
+			fav_.style.color = "#fff";
+		} else {
+			fav_.style.color = "#E4E009";
+		}
+
+		// Y el contenido...
+		mg_.innerHTML = aux_.FILAS[0].nmegusta;
+		fav_.innerHTML = aux_.FILAS[0].nfavorita;
+	};
+	xhr.setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
+	xhr.send();
+}
+
+
+
+// Método que realiza la petición de asignar/quitar fav o mg de una foto
+function asignarMgFav(boton) {
+	var url_, metodo_, id_ = info_foto_.FILAS[0].id;
+	var xhr = new XMLHttpRequest();
+
+	if (boton == "mg") {
+		console.log("Actualizamos megusta...");
+		url_ = "./api/fotos/" + id_ + "/megusta";
+		if (megusta_ == 1) {
+			metodo_ = "DELETE";
+		} else {
+			metodo_ = "POST";
+		}
+	} else {
+		console.log("Actualizamos favorita...");
+		url_ = "./api/fotos/" + id_ + "/favorita";
+		if (favorita_ == 1) {
+			metodo_ = "DELETE";
+		} else {
+			metodo_ = "POST";
+		}
+	}
+
+	xhr.open(metodo_, url_, true);
+	xhr.onload = function() {
+		var resultado_ = JSON.parse(xhr.responseText);
+		if (resultado_.RESULTADO == "OK") {
+			console.log("Transacción megusta/favorita terminada correctamente...");
+
+			// Actualizamos la información...
+			marcarMgFav(id_);
+		} else {
+			console.log("Transacción megusta/favorita terminada de manera incorrecta...");
+		}
+	};
+	xhr.setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
+	xhr.send();
+}
+
+
+
 /*
-	<article>
-		<div>
-			<h4>No es un buen título</h4>
-			<h5 class="icon-user">Alejandro Castro Valero <time datetime="2019-03-24T19:40">24-marzo-2019, 09:32h</time></h5>
-			<p>De todos los títulos posibles para ponerle a una foto has tenido que escoger una canción de nuestro Jona Alk. No podía haber sido uno de Ayax y Prok no...</p>
-		</div>
-	</article>
-*/
+ * Falta subir comentario!!
+ */
