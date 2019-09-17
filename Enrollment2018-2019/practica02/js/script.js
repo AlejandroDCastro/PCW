@@ -1045,13 +1045,13 @@ function mostrarInfoFoto() {
 		</div>`;
 
 	// Ahora cargamos los comentarios...
-	peticionComentarios(id_);
+	peticionComentarios(id_, "S");
 }
 
 
 
 // Función para cargar los comentarios de la foto
-function peticionComentarios(id) {
+function peticionComentarios(id, primera) {
 	var xhr = new XMLHttpRequest();
 
 	xhr.open("GET", "./api/fotos/" + id + "/comentarios", true);
@@ -1060,7 +1060,7 @@ function peticionComentarios(id) {
 		if (comentarios_.RESULTADO == "OK") {
 			console.log("Petición de los comentarios de la foto correcta...");
 			console.log(comentarios_);
-			crearComentarios(id);
+			crearComentarios(id, primera);
 		} else {
 			console.log("Petición de los comentarios de la foto incorrecta...");
 		}
@@ -1071,8 +1071,12 @@ function peticionComentarios(id) {
 
 
 // Función que crea los comentarios posteados en una foto
-function crearComentarios(id) {
+function crearComentarios(id, primera) {
 	var seccion_ = document.querySelector("#zona-comentarios>div");
+
+	if (primera == "N") {
+		borrarComentarios();
+	}
 
 	for (let i=0; i<comentarios_.FILAS.length; i++) {
 		var fechahora_ = comentarios_.FILAS[i].fechahora,
@@ -1091,7 +1095,7 @@ function crearComentarios(id) {
 	}
 
 	// Ahora marcamos los botones de mg y fav...
-	if (sessionStorage.getItem("login")) {
+	if (sessionStorage.getItem("login")  &&  primera == "S") {
 		marcarMgFav(id);
 	}
 }
@@ -1174,6 +1178,91 @@ function asignarMgFav(boton) {
 
 
 
-/*
- * Falta subir comentario!!
- */
+// Función para publicar el comentario escrito por el usuario
+function publicarComentario() {
+	var fd = new FormData();
+	fd.append("titulo", document.getElementById("titulo").value);
+	fd.append("texto", document.getElementById("texto").value);
+
+	var	xhr = new XMLHttpRequest();
+	xhr.open("POST", "./api/fotos/" + info_foto_.FILAS[0].id + "/comentario", true);
+	xhr.onload = function() {
+		var aux_ = JSON.parse(xhr.responseText);
+		console.log(aux_);
+		if (aux_.RESULTADO == "OK") {
+			mostrarMensajeComentarioT(true);
+		} else {
+			mostrarMensajeComentarioF(true);
+		}
+		return false;
+	};
+	xhr.setRequestHeader("Authorization", sessionStorage.getItem("login") + ":" + sessionStorage.getItem("token"));
+	xhr.send(fd);
+
+	return false;
+}
+
+
+
+function mostrarMensajeComentarioT(aparece) {
+	var mensaje_ = document.getElementById("uno");
+
+	if (aparece) {
+		mensaje_.style.display = "inline-block";
+	} else {
+		mensaje_.style.display = "none";
+
+		// Al cerrar mensaje modal limpiamos formulario...
+		document.getElementById("titulo").value = "";
+		document.getElementById("texto").value = "";
+
+		// Añadimos los comentarios
+		peticionComentarios(info_foto_.FILAS[0].id, "N");
+	}
+}
+
+
+
+function mostrarMensajeComentarioF(aparece) {
+	var mensaje_ = document.getElementById("dos");
+
+	if (aparece) {
+		mensaje_.style.display = "inline-block";
+	} else {
+		mensaje_.style.display = "none";
+
+		// Restablecemos el foco en el formulario...
+		document.getElementById("titulo").focus();
+	}
+}
+
+
+
+// Función que borra los comentarios de una foto
+function borrarComentarios() {
+	var div_ = document.querySelector("#zona-comentarios>div"),
+		num_articles_ = document.querySelectorAll("article").length;
+		console.log("holaaaaaaaaaaaaaaaaaa");
+	for (let i=0; i<num_articles_; i++) {
+		div_.removeChild(div_.lastChild);
+	}
+}
+
+
+
+// Función para mostrar el formulario para escribir un comentario
+function mostrarFormularioComentario() {
+	var h3_ = document.querySelector("#zona-comentarios>h3"),
+		form_ = document.querySelector("#zona-comentarios>form"),
+		p_ = document.querySelector("#zona-comentarios>p");
+
+	if (sessionStorage.getItem("login")) {
+		h3_.style.display = "inline-block";
+		form_.style.display = "inline-block";
+		p_.style.display = "none";
+	} else {
+		h3_.style.display = "none";
+		form_.style.display = "none";
+		p_.style.display = "inline-block";
+	}
+}

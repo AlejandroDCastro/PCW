@@ -767,6 +767,10 @@ div#div-busqueda-rapida {
 	cursor: pointer;
 }
 
+#zona-comentarios > p {
+	text-align: center;
+}
+
 
 
 
