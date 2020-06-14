@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Alejandro Castro Valero">
+    <meta name="author" content="Elizabeth Balbín Medina">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="css/styleAlex.css">
+    <link rel="stylesheet" href="css/styleEli.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="js/jsAlex.js"></script>
+    <script src="js/jsEli.js"></script>
+    <title>DLShop Artículo</title>
+</head>
+<body onload="dejarPregunta(), dejarPreguntaLogueado();">
+    <header id="cabecera">
+        <hgroup>
+            <h1><a href="index.html"><img src="images/logo.png" alt="Logotipo de DLShop"></a></h1>
+            <h2>¡Compra a tu gusto!</h2>
+        </hgroup>
+        <input type="checkbox" id="btn-menu">
+        <label for="btn-menu"><i class="fas fa-bars"></i></label>
+        <nav>
+            <ul>
+                <li><a href="index.html"> <span class = "icon-home"></span><span>Inicio</span></a></li>
+                <li><a href="buscar.html"><span class = "icon-search"></span><span>Buscar</span></a></li>
+                <li><a href="nuevo.html"><span class ="icon-plus"></span><span>Nuevo artículo</span></a></li>
+                <li><a href="login.html"><span class = "icon-user"></span><span>Entrar</span></a></li>
+                <li><a href="registro.html"><span class = "icon-user-plus"></span><span>Registro</span></a></li>
+                <li onclick="logout()"><a href="index.html"><span class ="icon-logout"></span><span>Salir</span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h3>Sobre el Artículo</h3>
+            <section id="infoArticulo">
+                <h4>Información</h4>
+                
+                <!-- Aquí va toda la información del artículo -->
+
+            </section>
+            <section id="preguntas">
+                
+                <h4>Cuestiones</h4>
+                <section id="dejarPregunta">
+                    <h5>Dejar una pregunta para el vendedor</h5>
+                    <!--<form action="articulo.html">
+                        <textarea name="pregunta" id="pregunta"></textarea>
+                        <div>
+                            <input type="submit" value="Enviar" class="boton">
+                        </div>
+                    </form>-->
+                </section>
+                <section id="grupoPreguntas">
+                    <h5>Preguntas sobre el artículo</h5>
+
+                <!-- Aquí van todas las preguntas y respuestas -->
+                
+                </section>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <p><a href="acerca.html">Acerca</a></p>
+        <p>© DLShop <time datetime="2020-02">2020</time></p>
+        <p><a href="#cabecera">
+            <span class="icon-angle-circled-up"></span>
+        </a></p>
+    </footer>
+</body>
+</html>

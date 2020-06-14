@@ -1,0 +1,716 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette|DM+Sans&display=swap');
+
+:root {
+    --naranjaClaro: #ffd3ad;
+    --naranjaOscuro: #d16909;
+    --azulClaro: #dfeaff;
+    --azulOscuro: #058dac;
+    --azulHover: #015264;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* PLANTILLA CSS */
+
+body {
+    font-family: 'DM Sans', sans-serif;
+}
+
+header {
+    background-color: var(--azulClaro);
+    display: flex;
+}
+
+    header>hgroup {
+        padding: 70px 20px 50px 60px;
+    }
+
+        header>hgroup>h1 {
+            text-align: center;
+        }
+
+            header>hgroup>h1>a>img {
+                background-color: #fff;
+                padding: 15px;
+                border-radius: 5%;
+            }
+
+        header>hgroup>h2 {
+            font-family: 'Courgette', sans-serif;
+            font-size: 1.7em;
+            color: var(--azulOscuro);
+            padding-top: 20px;
+            text-shadow: 2px 2px 2px var(--azulHover);
+        }
+
+    header>input {
+        display: none;
+    }
+
+    header>label {
+        display: none;
+    }
+
+        header>label>i {
+            font-size: 2em;
+            color: var(--azulOscuro);
+            padding: 15px 19px;
+            display: block;
+        }
+
+        header>label>i:hover {
+            cursor: pointer;
+            color: #fff;
+            background-color: var(--azulOscuro);
+            transition: .3s;
+        }
+
+    header>nav {
+        padding-top: 140px;
+        width: 90%;
+    }
+
+        header>nav>ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /*Permite a los elementos cambiar de línea en un espacio limitado*/
+        }
+
+            header>nav>ul>li {
+                margin: 40px 20px;
+            }
+
+                header>nav>ul>li>a {
+                    padding: 20px;
+                    text-decoration: none;
+                    background-color: #fff;
+                    border-radius: 3%;
+                    color: var(--azulOscuro);
+                    border: solid 3px var(--azulOscuro);
+                    box-shadow: 4px 4px 4px var(--azulHover);
+                    font-weight: bold;
+                }
+
+                header>nav>ul>li>a:hover {
+                    background-color: var(--azulOscuro);
+                    border-radius: 3%;
+                    color: #fff;
+                    border: solid 3px var(--azulOscuro);
+                    box-shadow: 4px 4px 4px var(--azulHover);
+                    transition: .3s;
+                }
+
+                header>nav>ul>li>a:active {
+                    box-shadow: none;
+                    transition: 0s;
+                    position: relative;
+                    top: 4px;
+                    left: 4px;
+                }
+
+main>section>h3 {
+    text-align: center;
+    padding: 20px;
+    font-size: 2.5em;
+    color: var(--azulOscuro);
+    font-family: 'Courgette', sans-serif;
+}
+
+main>section>section {
+    background-color: var(--azulClaro);
+    margin: 0 30px 50px 30px;
+    padding: 30px 10px 50px 10px;
+}
+
+    main>section>section>h4 {
+        color: #000;
+        padding: 30px;
+        font-size: 1.8em;
+    }
+
+footer {
+    background-color: var(--naranjaClaro);
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+}
+
+    footer>p {
+        font-size: 1.2em;
+        margin: 0 10px 0 10px;
+        font-weight: bold;
+        color: var(--naranjaOscuro);
+    }
+
+        footer>p>a,
+        footer>p>a>span {
+            font-weight: bold;
+            color: var(--naranjaOscuro);
+        }
+
+        footer>p>a:hover {
+            text-decoration: none;
+        }
+
+
+
+
+/*CSS para index.html*/
+
+.formResultado {
+    margin: 15px 30px 0 30px;
+}
+
+    .formResultado>p>label {
+        color: var(--azulOscuro);
+        font-weight: bold;
+    }
+
+    #busqueda>form>p>input {
+        width: 100%;
+    }
+
+    .formResultado>p>input {
+        height: 40px;
+        padding: 10px;
+        font-size: 1.2em;
+        background-color: transparent;
+        border: none;
+        border-bottom: solid 2px var(--azulOscuro);
+        border-radius: 4px;
+    }
+
+    .formResultado>p>input:hover {
+        border-bottom: solid 2px var(--azulHover);
+    }
+
+    .formResultado>p>input:focus {
+        border: solid 2px var(--azulOscuro);;
+    }
+
+#articulos>div:nth-child(2) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+    #articulos>div:nth-child(2)>article {
+        width: 400px;
+        margin: 10px;
+        padding: 10px;
+        position: relative;
+        background-color: #fff;
+        border: 2px solid var(--azulOscuro);
+    }
+
+    #articulos>div:nth-child(2)>article:hover {
+        box-shadow: 0 0 8px var(--azulHover);
+        transition: 6ms;
+    }
+
+        #articulos>div:nth-child(2)>article>p {
+            overflow: hidden;
+        }
+
+        #articulos>div:nth-child(2)>article>h5,
+        #infoArticulo>div>article>h5 {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+            #articulos>div:nth-child(2)>article>h5>a {
+                text-decoration: none;
+                color: var(--azulOscuro);
+            }
+
+            #articulos>div:nth-child(2)>article>h5>a:hover {
+                color: var(--azulHover);
+            }
+
+            #articulos>div:nth-child(2)>article>p>a>img:hover {
+                transform: scale(1.8);
+                transition: .5s;
+            }
+
+        #articulos>div:nth-child(2)>article>p:nth-child(3) {
+            position: absolute;
+            top: 60px;
+            right: 25px;
+            color: #8d8d8d;
+        }
+
+        #articulos>div:nth-child(2)>article>div:nth-child(4) {
+            border-bottom: 2px solid var(--azulOscuro);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+            #articulos>div:nth-child(2)>article>div>p {
+                display: inline-block;
+                margin-left: 7px;
+                font-weight: bold;
+            }
+
+            #articulos>div:nth-child(2)>article>div>p:nth-child(1),
+            #infoArticulo>div>article>p:nth-child(3) {
+                color: #b3b300;
+            }
+
+            #articulos>div:nth-child(2)>article>div>p:nth-child(2),
+            #infoArticulo>div>article>p:nth-child(4) {
+                color: #b30000;
+            }
+
+            #articulos>div:nth-child(2)>article>div>p:nth-child(3),
+            #infoArticulo>div>article>p:nth-child(5) {
+                color: #00b300;
+            }
+
+        #articulos>div:nth-child(2)>article>p:last-child {
+            height: 20px;
+            /*Determina como son manejados los espacios en blanco*/
+            white-space: nowrap; /*No cambia de línea*/
+            text-overflow: ellipsis;
+        }
+
+#articulos>div:nth-child(3) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+    #articulos>div:nth-child(3)>p {
+        font-size: 1.5em;
+        white-space: pre; /*Mantenemos los espacios en blanco*/
+    }
+
+
+
+
+/*CSS para buscar.html*/
+
+#busquedaGold>form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    #busquedaGold>form>p {
+        width: 50%;
+        padding: 10px;
+    }
+
+        #busquedaGold>form>p:not(#precio)>input {
+            width: 100%;
+        }
+
+        #precio>input {
+            width: 120px;
+            font-size: 1em;
+        }
+
+
+
+
+/*CSS para articulo.html*/
+
+.boton {
+    padding: 10px 30px;
+    font-size: 1.3em;
+    background-color: var(--azulHover);
+    color: #fff;
+    border: 2px solid var(--azulHover);
+    border-radius: 3%;
+    font-weight: bold;
+}
+
+.boton:hover {
+    background-color: #fff;
+    color: var(--azulHover);
+    cursor: pointer;
+    transition: .3s;
+}
+
+#infoArticulo>div {
+    width: 780px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 40px 30px 10px 30px;
+    border-radius: 1%;
+}
+
+        #infoArticulo>div>figure>p {
+            text-align: center;
+            font-size: 1.5em;
+            white-space: pre; /*Representa todos los espacios en blanco*/
+            color: var(--azulHover);
+            padding-top: 5px;
+        }
+
+    #infoArticulo>div>article {
+        width: 100%;
+        margin: 0 0 40px 20px;
+    }
+
+        #infoArticulo>div>article>h5 {
+            color: var(--azulHover);
+        }
+
+        #infoArticulo>div>article>p {
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+        #infoArticulo>div>article>p:nth-child(6) {
+            color: #b31a91;
+        }
+
+        #infoArticulo>div>article>p:nth-child(2)>a,    
+        #infoArticulo>div>article>p:nth-child(6)>a {
+                color: #b31a91;
+            }
+
+            #infoArticulo>div>article>p:nth-child(2)>a,
+            #infoArticulo>div>article>p:nth-child(6)>a {
+                text-decoration: none;
+            }
+
+            #infoArticulo>div>article>p:nth-child(2)>a:hover,
+            #infoArticulo>div>article>p:nth-child(6)>a:hover {
+                text-decoration: underline;
+            }
+
+        #infoArticulo>div>article>p>button {
+            margin: 40px 0 0 100px;
+        }
+
+#infoArticulo>p {
+    width: 90%;
+    margin: 30px auto 0 auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+#dejarPregunta,
+#grupoPreguntas {
+    width: 93%;
+    margin: 10px auto;
+}
+
+#dejarPregunta {
+    margin-bottom: 80px;
+}
+
+    #dejarPregunta>h5,
+    #grupoPreguntas>h5 {
+        font-size: 1.2em;
+    }
+
+        #dejarPregunta>form>textarea,
+        #grupoPreguntas>div>p:nth-child(2),
+        #grupoPreguntas>div>div>p:nth-child(2) {
+            width: 100%;
+            font-family: 'DM Sans', sans-serif;
+            border: 2px solid var(--azulHover);
+            margin-bottom: 10px;
+        }
+
+        #dejarPregunta>form>textarea {
+            height: 80px;
+            margin-top: 15px;
+        }
+
+        #dejarPregunta>form>textarea:hover,
+        #grupoPreguntas>div>p:nth-child(2):hover,
+        #grupoPreguntas>div>div>p:nth-child(2):hover {
+            border: 2px solid var(--azulOscuro);
+        }
+
+        #dejarPregunta>form>div {
+            display: flex;
+            justify-content: flex-end; /*Posiciona elementos al final del contenedor*/
+        }
+
+    #grupoPreguntas>div {
+        margin: 20px 0 40px 50px;
+    }
+
+    #grupoPreguntas>div:last-child {
+        margin: 20px 0 0 50px;
+    }
+
+        #grupoPreguntas>div>p:first-child,
+        #grupoPreguntas>div>div>p:first-child {
+            font-size: .7em;
+            font-weight: bold;
+        }
+
+        #grupoPreguntas>div>p:nth-child(2),
+        #grupoPreguntas>div>div>p:nth-child(2) {
+            background-color: #fff;
+            padding: 7px;
+        }
+
+            #grupoPreguntas>div>div {
+                margin-left: 50px;
+            }
+            #grupoPreguntas>div>span {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+                #grupoPreguntas>div>span>button {
+                    font-size: 1em;
+                    padding: 5px;
+                }
+
+
+
+
+/*Media Queries*/
+
+
+@media all and (max-width: 878px) {
+
+    header>nav {
+        padding-top: 60px;
+    }
+
+    #infoArticulo>div {
+        flex-direction: column;
+        width: 480px;
+        padding: 20px 10px 0 10px;
+    }
+
+    #infoArticulo>div>figure>p {
+        padding-bottom: 7px;
+    }
+
+    #infoArticulo>div>article {
+        margin: 0 0 30px 20px;
+        padding-bottom: 25px;
+    }
+
+    #infoArticulo>div>article {
+        margin: 0;
+        text-align: center;
+    }
+
+    #infoArticulo>div>article>p>button {
+        margin: 20px 0 0 0;
+    }
+}
+
+
+@media all and (max-width: 725px) {
+
+    header>nav {
+        padding-top: 40px;
+    }
+
+    header>nav>ul>li {
+        width: 80%;
+        margin: 0px auto;
+    }
+
+    header>nav>ul>li>a {
+        display: flex;
+        justify-content: center;
+        background-color: initial;
+        border: none;
+        border-bottom: 2px solid var(--azulOscuro);
+        box-shadow: none;
+        padding: 15px 0px;
+        border-radius: 0%; /*Si quitamos el radio, nos produce un bug al hacer hover sobre el borde*/
+    }
+
+    header>nav>ul>li:first-child>a {
+        border-top: 2px solid var(--azulOscuro);
+    }
+
+    header>nav>ul>li:first-child>a:hover {
+        border-top: 2px solid var(--azulOscuro);
+    }
+
+    header>nav>ul>li>a:hover {
+        background-color: var(--azulOscuro);
+        color: #fff;
+        border: none;
+        border-bottom: 2px solid var(--azulOscuro);
+        box-shadow: none;
+        transition: .3s;
+        border-radius: 0%;
+    }
+
+    header>nav>ul>li:first-child>a:hover {
+        border-top: 2px solid var(--azulOscuro);
+    }
+
+    header>nav>ul>li>a:active {
+        position: initial;
+    }
+}
+
+
+@media all and (max-width: 660px) {
+
+    #busquedaGold>form {
+        flex-wrap: initial;
+        flex-direction: column;
+    }
+
+    #busquedaGold>form>p {
+        width: 100%;
+    }
+
+    #precio>input {
+        width: 80px;
+    }
+}
+
+
+@media all and (max-width: 620px) {
+
+    #infoArticulo>div {
+        background-color: initial;
+        width: 80%;
+    }
+}
+
+
+@media all and (max-width: 550px) {
+
+    header {
+        flex-direction: column;
+    }
+
+    header>hgroup>h2 {
+        text-align: center;
+    }
+
+    header>nav {
+        padding-top: 0px;
+        width: 100%;
+    }
+
+    header>nav>ul {
+        width: 100%;
+        justify-content: initial;
+        flex-wrap: initial;
+        flex-direction: row;
+    }
+
+    header>nav>ul>li {
+        width: initial;
+        margin: initial;
+        flex-grow: 1;
+    }
+
+    header>nav>ul>li>a {
+        border: none;
+        color: #fff;
+        background-color: var(--azulOscuro);
+    }
+
+    header>nav>ul>li:first-child>a {
+        border-top: none;
+    }
+
+    header>nav>ul>li>a:hover {
+        border: none;
+        color: var(--azulOscuro);
+        background-color: var(--azulClaro);
+    }
+
+    header>nav>ul>li:first-child>a:hover {
+        border-top: none;
+    }
+
+    header>nav>ul>li>a>span:last-child {
+        display: none;
+    }
+
+    main>section>section {
+        margin: 0 0 50px 0;
+    }
+}
+
+
+@media all and (max-width: 479px) {
+
+    header>hgroup {
+        padding: 70px 20px 50px 20px;
+    }
+
+    header>nav>ul {
+        flex-direction: column;
+    }
+
+    header>nav>ul>li>a {
+        font-size: 1.3em;
+        border: none;
+        border-bottom: 2px solid #fff;
+        border-radius: 0%;
+    }
+
+    header>nav>ul>li:first-child>a {
+        border-top: 2px solid var(--azulOscuro);
+    }
+
+    header>nav>ul>li:first-child>a:hover {
+        border-top: 2px solid #fff;
+    }
+ 
+    header>nav>ul>li>a:hover {
+        background-color: var(--azulClaro);
+        color: var(--azulOscuro);
+        border: none;
+        border-bottom: 2px solid #fff;
+        box-shadow: none;
+        transition: .3s;
+        border-radius: 0%;
+    }
+
+    header>nav>ul>li>a>span:last-child {
+        display: initial;
+    }
+
+    /*Cuando aparece el menú desplegable y desaparece*/
+    header>label {
+        display: initial;
+    }
+
+    #btn-menu:not(:checked)~nav { 
+        margin-left: -100%;
+        height: 0;
+    }
+    
+    #btn-menu:checked~nav {
+        margin: 0;
+        transition: all .5s;
+    }
+}
+
+
+@media all and (max-width: 370px) {
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer>p {
+        padding: 10px;
+    }
+}

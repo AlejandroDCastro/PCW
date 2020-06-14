@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Alejandro Castro Valero">
+    <meta name="author" content="Elizabeth Balbín Medina">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="css/styleAlex.css">
+    <link rel="stylesheet" href="css/styleEli.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>DLShop Artículo</title>
+</head>
+<body>
+    <header id="cabecera">
+        <hgroup>
+            <h1><a href="index.html"><img src="images/logo.png" alt="Logotipo de DLShop"></a></h1>
+            <h2>¡Compra a tu gusto!</h2>
+        </hgroup>
+        <input type="checkbox" id="btn-menu">
+        <label for="btn-menu"><i class="fas fa-bars"></i></label>
+        <nav>
+            <ul>
+                <li><a href="index.html"> <span class = "icon-home"></span><span>Inicio</span></a></li>
+                <li><a href="buscar.html"><span class = "icon-search"></span><span>Buscar</span></a></li>
+                <li><a href="nuevo.html"><span class ="icon-plus"></span><span>Nuevo artículo</span></a></li>
+                <li><a href="login.html"><span class = "icon-user"></span><span>Entrar</span></a></li>
+                <li><a href="registro.html"><span class = "icon-user-plus"></span><span>Registro</span></a></li>
+                <li><a href="index.html"><span class ="icon-logout"></span><span>Salir</span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h3>Sobre el Artículo</h3>
+            <section id="infoArticulo">
+                <h4>Información</h4>
+                <div>
+                    <figure>
+                        <img src="Images/destornillador-electrico-xiaomi.jpg" alt="Foto no disponible" width="400">
+                        <p><i class="fas fa-arrow-left"></i> <span>  1 de 6  </span> <i class="fas fa-arrow-right"></i></p>
+                    </figure>
+                    <article>
+                        <h5>Destornillador eléctrico Xiaomi</h5>
+                        <p>Vendedor: <a href="buscar.html">Alexxei</a></p>
+                        <p><i class="fas fa-coins"></i> 10,50 €</p>
+                        <p><i class="fas fa-eye"></i> 73</p>
+                        <p class="icon-user"> 8</p>
+                        <p class="icon-comment"> <a href="#grupoPreguntas">2</a></p>
+                        <p>
+                            <button class="boton">Seguir</button>
+                        </p>
+                    </article>
+                </div>
+                <p>El nuevo destornillador eléctrico de Xiaomi tiene un diseño realmente atractivo en el que el “estilo Xiaomi”, caracterizado por el minimalismo y las líneas puras tiene mucha presencia. El cuenta con tres posiciones que le permiten aflojar y apretar en función del sentido de giro, así como una tercera que bloquea el giro. El nuevo destornillador de Mijia cuenta con una fuerza de apriete de 4 N.M. e integra una batería de 2.000 mAh que, según la marca, da para unos 180 usos por cada carga.</p>
+            </section>
+            <section id="preguntas">
+                <h4>Cuestiones</h4>
+                <section id="dejarPregunta">
+                    <h5>Dejar una pregunta para el vendedor</h5>
+                    <form action="articulo.html">
+                        <textarea name="pregunta" id="pregunta"></textarea>
+                        <div>
+                            <input type="submit" value="Enviar"  class="boton">
+                        </div>
+                    </form>
+                </section>
+                <section id="grupoPreguntas">
+                    <h5>Preguntas sobre el artículo</h5>
+                    <div>
+                        <p>Juanjo <time datetime="2020-01-24 09:30">24-enero-2020, a las 09:32h</time></p>
+                        <p>¿Funciona con pilas o es recargable?</p>
+                        <div>
+                            <p>Alexxei <time datetime="2020-01-26 17:03">26-enero-2020, a las 17:03h</time></p>
+                            <p>Es recargable, viene con un cargador.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Juanki <time datetime="2020-02-02 09:30">2-febrero-2020, a las 09:32h</time></p>
+                        <p>De qué material está hecho la carcasa?</p>
+                        <span>
+                            <button class="boton">Responder</button>
+                        </span>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <p><a href="acerca.html">Acerca</a></p>
+        <p>© DLShop <time datetime="2020-02">2020</time></p>
+        <p><a href="#cabecera">
+            <span class="icon-angle-circled-up"></span>
+        </a></p>
+    </footer>
+</body>
+</html>

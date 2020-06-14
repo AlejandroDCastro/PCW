@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Alejandro Castro Valero">
+    <meta name="author" content="Elizabeth Balbín Medina">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="js/sudoku.js"></script>
+    <title>Sudoku - Game</title>
+</head>
+<body>
+    <header>
+        <h1>Sudoku</h1>
+        <a href="index.html"><img src="img/logo3.jpg" class="logo" alt="logo"></a>
+        <p>El objetivo del juego es rellenar una cuadrícula de 4 o 9 celdas dividida en subcuadrículas de 3×3 con las cifras del 1 al 9 partiendo de algunos números ya dispuestos en algunas de las celdas.
+        No se debe repetir ningún número en una misma fila, columna o subcuadrícula.</p>
+    </header>
+    <main>
+        <section id="canvas">
+            <h2>Panel del juego</h2>
+            <h3>Tamaño del juego</h3>
+            <form>
+                <input type="radio" id="tam1" name="size" value="4" checked><label for="tam1"> 4</label>
+                <input type="radio" id="tam2" name="size" value="9"><label for="tam2"> 9</label>
+            </form>
+            <button type="button" id="inicio">Empezar</button>
+            <canvas id="cv01" width="480" height="480"></canvas>
+        </section>
+    </main>
+    <footer>
+        <p><strong><a href="acerca.html">Acerca</a></strong></p>
+        <p>&copy; PCW 2020 - Práctica 3</p>
+    </footer>
+</body>
+</html>

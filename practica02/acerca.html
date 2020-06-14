@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Alejandro Castro Valero">
+    <meta name="author" content="Elizabeth Balbín Medina">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>DLShop Inicio</title>
+    <link rel="stylesheet" href="css/styleAlex.css">
+    <link rel="stylesheet" href="css/styleEli.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="js/jsAlex.js"></script>
+</head>
+<body>
+    <header id="cabecera">
+        <hgroup>
+            <h1><a href="index.html"><img src="images/logo.png" alt="Logotipo de DLShop"></a></h1>
+            <h2>¡Compra a tu gusto!</h2>
+        </hgroup>
+        <input type="checkbox" id="btn-menu">
+        <label for="btn-menu"><i class="fas fa-bars"></i></label>
+        <nav>
+            <ul>
+                <li><a href="index.html"> <span class = "icon-home"></span><span>Inicio</span></a></li>
+                <li><a href="buscar.html"><span class = "icon-search"></span><span>Buscar</span></a></li>
+                <li><a href="nuevo.html"><span class ="icon-plus"></span><span>Nuevo artículo</span></a></li>
+                <li><a href="login.html"><span class = "icon-user"></span><span>Entrar</span></a></li>
+                <li><a href="registro.html"><span class = "icon-user-plus"></span><span>Registro</span></a></li>
+                <li onclick="logout()"><a href="index.html"><span class ="icon-logout"></span><span>Salir</span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h3>Práctica 2 - Programación del Cliente Web<br>
+            2º curso - Grado Ingeniería Multimedia</h3>
+            <section id="acerca">
+                <h4>Alumnos</h4>
+                <div id="flex">
+                    <div>
+                        <article>
+                            <h4>Alejandro Castro Valero</h4>
+                            <p><b>DNI: </b>20521823G</p>
+                            <p><b>Email: </b>acv52@alu.ua.es</p>
+                            <p><b>Grupo de prácticas: </b>Grupo 1, Jueves 17:00-19:00</p>
+                        </article>
+                    </div>
+                    <div>
+                        <article>
+                            <h4>Elizabeth Balbín Medina</h4>
+                            <p><b>DNI: </b>Y1085080T</p>
+                            <p><b>Email:</b> eibm1@alu.ua.es</p>
+                            <p><b>Grupo de prácticas: </b>Grupo 3, Martes 17:00-19:00</p>
+                         </article>
+                    </div>
+                </div>
+                <article>
+                    <h4>Trabajo realizado</h4>
+                    <p>Se ha realizado todo lo que se pide en la práctica.</p>
+                    <p>No ha habido en general ningún problema a la hora de implementar los apartados propuestos en el enunciado.</p>
+                    <p>Se ha intentado implementar aparte, un botón para la eliminar una foto en la página nuevo.html, pero su funcionamiento está incompleto.</p>
+                </article>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <p><a href="acerca.html">Acerca</a></p>
+        <p>© DLShop <time datetime="2020-02">2020</time></p>
+        <p><a href="#cabecera">
+            <span class="icon-angle-circled-up"></span>
+        </a></p>
+    </footer>
+</body>
+</html>

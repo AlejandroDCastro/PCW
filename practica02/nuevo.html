@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Alejandro Castro Valero">
+    <meta name="author" content="Elizabeth Balbín Medina">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>DLShop - Nuevo</title>
+    <link rel="stylesheet" href="css/styleAlex.css">
+    <link rel="stylesheet" href="css/styleEli.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="js/jsAlex.js"></script>
+    <script src="js/jsEli.js"></script>
+</head>
+<body>
+    <header id="cabecera">
+        <hgroup>
+            <h1><a href="index.html"><img src="images/logo.png" alt="Logotipo de DLShop"></a></h1>
+            <h2>¡Compra a tu gusto!</h2>
+        </hgroup>
+        <input type="checkbox" id="btn-menu">
+        <label for="btn-menu"><i class="fas fa-bars"></i></label>
+        <nav>
+            <ul>
+                <li><a href="index.html"> <span class = "icon-home"></span><span>Inicio</span></a></li>
+                <li><a href="buscar.html"><span class = "icon-search"></span><span>Buscar</span></a></li>
+                <li><a href="nuevo.html"><span class ="icon-plus"></span><span>Nuevo artículo</span></a></li>
+                <li><a href="login.html"><span class = "icon-user"></span><span>Entrar</span></a></li>
+                <li><a href="registro.html"><span class = "icon-user-plus"></span><span>Registro</span></a></li>
+                <li onclick="logout()"><a href="index.html"><span class ="icon-logout"></span><span>Salir</span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h3>Publicar artículo</h3>
+            <section id="article">
+                <h4>Nuevo artículo</h4>
+                <div id="nuevo-form">
+                    <form name="nuevo" onsubmit="return enviarArticulo(this);">
+                        <label for="nombre">Nombre del artículo: </label>
+                        <input type="text" name="nombre" id="nombre" maxlength="100" placeholder="Nombre del artículo, máx. 100 caracteres" required autofocus><br>
+    
+                        <label for="descripcion">Descripción: </label>
+                        <textarea name="descripcion" id="descripcion" rows="10" cols="100" maxlength="300" placeholder="Escribe aquí la descripción, máx. 300 caracteres" required></textarea><br>
+                    
+                        <label for="precio">Precio: </label>
+                        <input type="number" name="precio" id="precio" min="0" step="0.01" required placeholder="00.00">
+                    
+                        <label for="cat">Categoría: </label>
+                        <input type="text" list="categoria" name="categoria" id="cat" required maxlength="100" onfocus="pedirCategorias();">
+                        <datalist id="categoria">
+                            <!--<option value="Moda y Accesorios">
+                            <option value="TV, Audio y Foto">
+                            <option value="Informática y Electrónica">
+                            <option value="Cine, Libros y Música">
+                            <option value="Consolas y Videojuegos">
+                            <option value="Deporte y Ocio">-->
+                        </datalist>
+                        <br>
+                        <h3>Foto del artículo:</h3>
+                        <div class="archive">
+                            <div>
+                                <label for="file-input">
+                                    <img src="Images/no-image.png" alt='' class="no-photo">
+                                </label>
+                                <input type="file" name="fichero" id="file-input" onchange="cargarFoto(this);" accept="image/*" class="file-input">
+                                <label onclick="limpiar(this);" class="subir-label"><i class="fas fa-trash-alt"></i> Eliminar foto</label>
+                            </div>
+                        </div>
+                        <button onclick="añadirFoto();" class="subir-label">Añadir foto</button>
+                        <!--<label for="subir" id="subir-label" onclick="añadirFoto();">Añadir foto</label><br>-->
+                        <input type="submit" value="Publicar" class="subir-label">
+                    </form>
+                </div>
+            </section>
+        </section>     
+    </main>
+    <footer>
+        <p><a href="acerca.html">Acerca</a></p>
+        <p>© DLShop <time datetime="2020-02">2020</time></p>
+        <p><a href="#cabecera">
+            <span class="icon-angle-circled-up"></span>
+        </a></p>
+    </footer>
+</body>
+</html>

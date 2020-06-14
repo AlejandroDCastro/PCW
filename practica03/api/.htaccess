@@ -1,0 +1,36 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+# Ruta completa desde htdocs hasta la carpeta "api".
+# Si el path hasta la carpeta es:
+#   Windows: C:\xampp\htdocs\pcw\practica3\api,
+#   Linux:   /opt/lampp/htdocs/pcw/practica3/api,
+# habría que poner lo siguiente: RewriteBase /pcw/practica3/api/
+RewriteBase /PCW/practica03/api/
+
+##################################################
+### REGLAS PARA SUDOKU
+##################################################
+### PEDIR UN SUDOKU EN PARTICULAR
+# Regla que redirige a api/get/sudoku.php
+# Con esta línea de abajo, sólo acepta peticiones GET
+RewriteCond %{THE_REQUEST} ^GET
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^sudoku(.*)$ get/sudoku.php?prm=$1&%{QUERY_STRING} [L]
+
+### PEDIR NUEVO SUDOKU
+# Regla que redirige a api/post/sudoku.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^sudoku(.*)$ post/sudoku.php?prm=$1&%{QUERY_STRING} [L]
+
+### DAR DE BAJA UNA PARTIDA
+# Regla que redirige a api/delete/sudoku.php
+# Con esta línea de abajo, sólo acepta peticiones DELETE
+RewriteCond %{THE_REQUEST} ^DELETE
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^sudoku(.*)$ delete/sudoku.php?prm=$1&%{QUERY_STRING} [L]

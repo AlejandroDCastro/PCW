@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Alejandro Castro Valero">
+    <meta name="author" content="Elizabeth Balbín Medina">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>DLShop - Login</title>
+    <link rel="stylesheet" href="css/styleAlex.css">
+    <link rel="stylesheet" href="css/styleEli.css">
+    <link rel="stylesheet" href="css/fontello.css">
+</head>
+<body>
+    <header id="cabecera">
+        <hgroup>
+            <h1><a href="index.html"><img src="images/logo.png" alt="Logotipo de DLShop"></a></h1>
+            <h2>¡Compra a tu gusto!</h2>
+        </hgroup>
+        <nav>
+            <ul>
+                <li><a href="index.html"> <span class = "icon-home"></span><span>Inicio</span></a></li>
+                <li><a href="buscar.html"><span class = "icon-search"></span><span>Buscar</span></a></li>
+                <li><a href="nuevo.html"><span class ="icon-plus"></span><span>Nuevo artículo</span></a></li>
+                <li><a href="login.html"><span class = "icon-user"></span><span>Entrar</span></a></li>
+                <li><a href="registro.html"><span class = "icon-user-plus"></span><span>Registro</span></a></li>
+                <li><a href="index.html"><span class ="icon-logout"></span><span>Salir</span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h3>Entrar</h3>
+            <section id="entrar">
+                <h4>Iniciar sesión</h4>
+                <div>
+                    <form name="login">
+                        <label for="name"><b>Nombre de usuario: </b></label>
+                        <input type="text" id="name" placeholder="Introduce tu usuario" autofocus required>
+                        <label for="pass"><b>Contraseña: </b></label>
+                        <input type="password" name="pass" id="pass" placeholder="Introduce tu contraseña" required>
+                        <input type="submit" id="boton_log" value="Entrar">
+                        <br><p><b>¿No tienes una cuenta?</b><br><a href="registro.html">¡Regístrate ahora!</a></p>
+                    </form>
+                </div>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <p><a href="acerca.html">Acerca</a></p>
+        <p>© DLShop <time datetime="2020-02">2020</time></p>
+        <p><a href="#cabecera">
+            <span class="icon-angle-circled-up"></span>
+        </a></p>
+    </footer>
+</body>
+</html>
